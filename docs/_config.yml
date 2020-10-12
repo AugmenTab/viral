@@ -13,3 +13,4 @@ description: "A strategy game wearing the skin of a social media app."
 author:
   name: "Tyler Baum"
   
+theme: jekyll-theme-hacker
