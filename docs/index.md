@@ -57,7 +57,7 @@ The game will be data-driven, with all possible text displayed during the game l
     * The app will take advantage of Leaflet's ability to place markers on a user-imported map image to track the location of infected players after they reach a critical infection point. This will be displayed as a pinned link on the user's feed, presented in the story as a list of addresses where police have responded to reports of unexplained aggressive behavior. This will be accomplished by storing points on the map as values in the database, then assigning a random fake address to the user at the start of a new game as their "current location" and to all members of their friends list. As friends become infected at the maximum infection level, their fake address will be plotted on the map. The user can then check that address against profiles to determine who is infected.
         * This app could still be usable without this external service. Instead of having a map, the player would have to rely on other clues to help them determine which of their friends have been infected - the map simply informs them of final-stage infection, which will not be the ideal time to delete them anyway.
 
-## Wifeframe
+## Wireframe
 
 ![Codebreaker Wireframe](img/wireframe.png)
 
