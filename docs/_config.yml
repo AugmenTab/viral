@@ -1,0 +1,15 @@
+remote_theme: ddc-java/ddc-day
+repository_links:
+  enabled: false
+page_navigator:
+  enabled: false
+titles_from_headings:
+  enabled: false
+
+# Modify the contents below for the specific project.
+
+title: "Viral"
+description: "A strategy game wearing the skin of a social media app."
+author:
+  name: "Tyler Baum"
+  
