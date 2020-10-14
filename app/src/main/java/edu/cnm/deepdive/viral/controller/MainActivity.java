@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral;
+package edu.cnm.deepdive.viral.controller;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import edu.cnm.deepdive.viral.R;
 
 public class MainActivity extends AppCompatActivity {
 

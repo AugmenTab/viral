@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.ui.gallery;
+package edu.cnm.deepdive.viral.controller.ui.gallery;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

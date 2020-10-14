@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.ui.slideshow;
+package edu.cnm.deepdive.viral.controller.ui.slideshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
