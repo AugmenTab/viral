@@ -59,7 +59,7 @@ The game will be data-driven, with all possible text displayed during the game l
 
 ## Wireframe
 
-[![Codebreaker Wireframe](img/wireframe.png)](pdf/wireframe.pdf)
+* [Codebreaker Wireframe](wireframe.md)
 
 ## Technical Design
 
