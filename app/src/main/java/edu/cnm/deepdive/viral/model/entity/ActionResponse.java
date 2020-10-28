@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.viral.model.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -23,13 +24,14 @@ public class ActionResponse {
   @ColumnInfo(name = "action_response_id")
   private long id;
 
-  // Nullable - wrapper used instead of primitive
   @ColumnInfo(name = "response_to_id")
-  private Long responseTo;
+  private Action responseTo;
 
+  @NonNull
   @ColumnInfo(name = "response_id")
-  private long response;
+  private Action response;
 
+  @ColumnInfo(name = "appearance_chance")
   private int appearanceChance;
 
   public long getId() {
@@ -40,19 +42,19 @@ public class ActionResponse {
     this.id = id;
   }
 
-  public Long getResponseTo() {
+  public Action getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(Long responseTo) {
+  public void setResponseTo(Action responseTo) {
     this.responseTo = responseTo;
   }
 
-  public long getResponse() {
+  public Action getResponse() {
     return response;
   }
 
-  public void setResponse(long response) {
+  public void setResponse(Action response) {
     this.response = response;
   }
 

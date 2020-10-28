@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey;
         @Index(value = "profile_picture", unique = true)
     }
 )
-public class Friend { // Rather than deleting Friends, maybe create boolean "active?"
+public class Friend {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "friend_id")
@@ -28,15 +28,19 @@ public class Friend { // Rather than deleting Friends, maybe create boolean "act
   @NonNull
   private String name;
 
+  @ColumnInfo(name = "infection_level")
   private int infectionLevel;
 
-  private int demeanor;
+  @NonNull
+  @ColumnInfo(name = "demeanor_id")
+  private Demeanor demeanor;
 
   private boolean active;
 
   private int address;
 
   @NonNull
+  @ColumnInfo(name = "profile_picture")
   private String profilePicture;
 
   public long getId() {
@@ -63,11 +67,11 @@ public class Friend { // Rather than deleting Friends, maybe create boolean "act
     this.infectionLevel = infectionLevel;
   }
 
-  public int getDemeanor() {
+  public Demeanor getDemeanor() {
     return demeanor;
   }
 
-  public void setDemeanor(int demeanor) {
+  public void setDemeanor(Demeanor demeanor) {
     this.demeanor = demeanor;
   }
 

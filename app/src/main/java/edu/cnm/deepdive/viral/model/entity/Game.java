@@ -18,14 +18,16 @@ public class Game {
   private long id;
 
   @NonNull
+  @ColumnInfo(name = "start_time")
   private Date startTime;
 
-  @NonNull
+  @ColumnInfo(name = "end_time")
   private Date endTime;
 
-  private int moves;
+  private Integer moves;
 
-  private int friendsLeft;
+  @ColumnInfo(name = "friends_left")
+  private Integer friendsLeft;
 
   public long getId() {
     return id;
@@ -51,19 +53,19 @@ public class Game {
     this.endTime = endTime;
   }
 
-  public int getMoves() {
+  public Integer getMoves() {
     return moves;
   }
 
-  public void setMoves(int moves) {
+  public void setMoves(Integer moves) {
     this.moves = moves;
   }
 
-  public int getFriendsLeft() {
+  public Integer getFriendsLeft() {
     return friendsLeft;
   }
 
-  public void setFriendsLeft(int friendsLeft) {
+  public void setFriendsLeft(Integer friendsLeft) {
     this.friendsLeft = friendsLeft;
   }
 

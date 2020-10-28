@@ -30,18 +30,20 @@ public class ActionTaken {
   @ColumnInfo(name = "action_taken_id")
   private long id;
 
+  @NonNull
   @ColumnInfo(name = "friend_id")
-  private long friend;
+  private Friend friend;
 
   @NonNull
   private Date timestamp;
 
+  @NonNull
   @ColumnInfo(name = "action_id")
-  private long action;
+  private Action action;
 
-  // Nullable - wrapper used instead of primitive
+  @NonNull
   @ColumnInfo(name = "response_to_id")
-  private Long responseTo;
+  private ActionResponse responseTo;
 
   @NonNull
   private String content; // Do I even need this if it can just reference the content of the action?
@@ -54,43 +56,47 @@ public class ActionTaken {
     this.id = id;
   }
 
-  public long getFriend() {
+  public Friend getFriend() {
     return friend;
   }
 
-  public void setFriend(long friend) {
+  public void setFriend(Friend friend) {
     this.friend = friend;
   }
 
+  @NonNull
   public Date getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp) {
+  public void setTimestamp(@NonNull Date timestamp) {
     this.timestamp = timestamp;
   }
 
-  public long getAction() {
+  @NonNull
+  public Action getAction() {
     return action;
   }
 
-  public void setAction(long action) {
+  public void setAction(@NonNull Action action) {
     this.action = action;
   }
 
-  public Long getResponseTo() {
+  @NonNull
+  public ActionResponse getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(Long responseTo) {
+  public void setResponseTo(@NonNull ActionResponse responseTo) {
     this.responseTo = responseTo;
   }
 
+  @NonNull
   public String getContent() {
     return content;
   }
 
-  public void setContent(String content) {
+  public void setContent(@NonNull String content) {
     this.content = content;
   }
 

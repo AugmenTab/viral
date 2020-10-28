@@ -16,10 +16,13 @@ public class Demeanor {
   @NonNull
   private String name;
 
+  @ColumnInfo(name = "starting_chance")
   private int startingChance;
 
+  @ColumnInfo(name = "infection_min")
   private int infectionMin;
 
+  @ColumnInfo(name = "infection_max")
   private int infectionMax;
 
   public long getId() {

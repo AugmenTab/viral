@@ -23,8 +23,11 @@ public class Action {
   @ColumnInfo(name = "public")
   private boolean isPublic;
 
-  private long demeanor;
+  @NonNull
+  @ColumnInfo(name = "demeanor_id")
+  private Demeanor demeanor;
 
+  @ColumnInfo(name = "appearance_chance")
   private int appearanceChance;
 
   public long getId() {
@@ -51,11 +54,12 @@ public class Action {
     isPublic = aPublic;
   }
 
-  public long getDemeanor() {
+  @NonNull
+  public Demeanor getDemeanor() {
     return demeanor;
   }
 
-  public void setDemeanor(long demeanor) {
+  public void setDemeanor(@NonNull Demeanor demeanor) {
     this.demeanor = demeanor;
   }
 
