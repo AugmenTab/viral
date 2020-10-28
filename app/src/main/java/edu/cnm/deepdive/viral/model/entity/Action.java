@@ -6,9 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Demeanor.class,
-    parentColumns = "id",
-    childColumns = "demeanor"
+@Entity(foreignKeys = @ForeignKey(
+    entity = Demeanor.class,
+    parentColumns = "demeanor_id",
+    childColumns = "demeanor_id"
 ))
 public class Action {
 

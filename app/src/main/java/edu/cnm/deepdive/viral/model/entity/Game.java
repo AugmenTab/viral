@@ -7,15 +7,16 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import java.util.Date;
 
-@Entity(indices = @Index(value = {"start_time", "end_time"}, unique = true))
-public class Game { // Read that all primitives are NonNull by default?
+@Entity(indices = {
+    @Index(value = "start_time", unique = true),
+    @Index(value = "end_time", unique = true)
+})
+public class Game {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "game_id")
   private long id;
 
-  // Do the dates need to be unique keys? I imagine they will be unique simply because one cannot
-  // possibly start two new games in the same second.
   @NonNull
   private Date startTime;
 

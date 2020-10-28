@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey;
 @Entity(foreignKeys = {
     @ForeignKey(
         entity = Action.class,
-        parentColumns = "id",
-        childColumns = "responseTo"
+        parentColumns = "action_id",
+        childColumns = "response_to_id"
     ),
     @ForeignKey(
         entity = Action.class,
-        parentColumns = "id",
-        childColumns = "response"
+        parentColumns = "action_id",
+        childColumns = "response_id"
     )
 })
 public class ActionResponse {

@@ -10,10 +10,14 @@ import androidx.room.PrimaryKey;
 @Entity(
     foreignKeys = @ForeignKey(
         entity = Demeanor.class,
-        parentColumns = "id",
-        childColumns = "demeanor"
+        parentColumns = "demeanor_id",
+        childColumns = "demeanor_id"
     ),
-    indices = @Index(value = {"name", "address", "profile_picture"}, unique = true)
+    indices = {
+        @Index(value = "name", unique = true),
+        @Index(value = "address", unique = true),
+        @Index(value = "profile_picture", unique = true)
+    }
 )
 public class Friend { // Rather than deleting Friends, maybe create boolean "active?"
 
@@ -27,6 +31,8 @@ public class Friend { // Rather than deleting Friends, maybe create boolean "act
   private int infectionLevel;
 
   private int demeanor;
+
+  private boolean active;
 
   private int address;
 
@@ -63,6 +69,14 @@ public class Friend { // Rather than deleting Friends, maybe create boolean "act
 
   public void setDemeanor(int demeanor) {
     this.demeanor = demeanor;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   public int getAddress() {

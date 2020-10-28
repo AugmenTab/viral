@@ -10,18 +10,18 @@ import java.util.Date;
 @Entity(foreignKeys = {
     @ForeignKey(
         entity = Action.class,
-        parentColumns = "id",
-        childColumns = "action"
+        parentColumns = "action_id",
+        childColumns = "action_id"
     ),
     @ForeignKey(
         entity = ActionResponse.class,
-        parentColumns = "responseTo",
-        childColumns = "responseTo"
+        parentColumns = "response_to_id",
+        childColumns = "response_to_id"
     ),
     @ForeignKey(
         entity = Friend.class,
-        parentColumns = "id",
-        childColumns = "friend"
+        parentColumns = "friend_id",
+        childColumns = "friend_id"
     )
 })
 public class ActionTaken {
