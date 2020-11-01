@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.viral.model.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import io.reactivex.Single;
@@ -29,6 +31,10 @@ public interface GameDao {
   @Update
   Single<Integer> update(Collection<Game> games);
 
-  // TODO Write queries.
+  @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
+  LiveData<List<Game>> selectAll();
+
+  @Query("SELECT * FROM Game WHERE end_time IS NULL")
+  LiveData<Game> selectCurrent();
   
 }

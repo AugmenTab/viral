@@ -47,11 +47,11 @@ Cardinality/modality
  
 Filter
 
-: id, name
+: id
  
 Sort order
 
-: id, ascending
+: name, ascending
 
 ### Query: Get Infected Friends
 
@@ -83,7 +83,25 @@ Cardinality/modality
  
 Filter
 
-: infectionLevel, demeanor
+: infectionLevel, active
+ 
+Sort order
+
+: infectionLevel, ascending
+
+### Query: All Max Infected Friends
+
+Purpose
+
+: Query to get a list of all remaining friends on the player's friends list who have reached the maximum infection level.
+
+Cardinality/modality
+
+: many/optional
+ 
+Filter
+
+: infectionLevel, active
  
 Sort order
 

@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.viral.model.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import io.reactivex.Single;
@@ -39,6 +41,16 @@ public interface FriendDao {
   @Delete
   Single<Integer> delete(Collection<Friend> friends);
 
-  // TODO Write queries.
+  @Query("SELECT * FROM Friend WHERE friend_id = :id ORDER BY name ASC")
+  LiveData<Friend> selectSpecificFriend(long id);
+
+  @Query("SELECT * FROM Friend WHERE active = :active ORDER BY infection_level ASC")
+  LiveData<List<Friend>> selectAllRemaining(boolean active);
+
+  @Query("SELECT * FROM Friend WHERE infection_level > 0 AND active = :active ORDER BY infection_level DESC")
+  LiveData<List<Friend>> selectInfectedFriends(boolean active);
+
+  @Query("SELECT * FROM Friend WHERE infection_level = 3 AND active = :active")
+  LiveData<List<Friend>> selectMaxInfected(boolean active);
 
 }

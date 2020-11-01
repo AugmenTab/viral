@@ -47,9 +47,26 @@ Cardinality/modality
  
 Filter
 
-: moves, friendsLeft
+: endTime, moves, friendsLeft
  
 Sort order
 
-: moves, ascending; friendsLeft; descending
+: endTime is not null, moves, ascending; friendsLeft; descending
 
+### Query: Current Game
+
+Purpose
+
+: Query to the user's current game.
+
+Cardinality/modality
+
+: one/optional
+ 
+Filter
+
+: startTime
+ 
+Sort order
+
+: startTime, desc
