@@ -33,7 +33,7 @@ public class Friend {
 
   @NonNull
   @ColumnInfo(name = "demeanor_id")
-  private Demeanor demeanor;
+  private long demeanor;
 
   private boolean active;
 
@@ -67,11 +67,11 @@ public class Friend {
     this.infectionLevel = infectionLevel;
   }
 
-  public Demeanor getDemeanor() {
+  public long getDemeanor() {
     return demeanor;
   }
 
-  public void setDemeanor(Demeanor demeanor) {
+  public void setDemeanor(long demeanor) {
     this.demeanor = demeanor;
   }
 

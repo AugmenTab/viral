@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.viral.model.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Friend;
@@ -28,6 +29,15 @@ public interface FriendDao {
 
   @Update
   Single<Integer> update(Collection<Friend> friends);
+
+  @Delete
+  Single<Integer> delete(Friend friend);
+
+  @Delete
+  Single<Integer> delete(Friend... friends);
+
+  @Delete
+  Single<Integer> delete(Collection<Friend> friends);
 
   // TODO Write queries.
 

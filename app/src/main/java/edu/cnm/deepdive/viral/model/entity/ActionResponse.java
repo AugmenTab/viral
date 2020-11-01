@@ -25,11 +25,11 @@ public class ActionResponse {
   private long id;
 
   @ColumnInfo(name = "response_to_id")
-  private Action responseTo;
+  private long responseTo;
 
   @NonNull
   @ColumnInfo(name = "response_id")
-  private Action response;
+  private long response;
 
   @ColumnInfo(name = "appearance_chance")
   private int appearanceChance;
@@ -42,19 +42,19 @@ public class ActionResponse {
     this.id = id;
   }
 
-  public Action getResponseTo() {
+  public long getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(Action responseTo) {
+  public void setResponseTo(long responseTo) {
     this.responseTo = responseTo;
   }
 
-  public Action getResponse() {
+  public long getResponse() {
     return response;
   }
 
-  public void setResponse(Action response) {
+  public void setResponse(long response) {
     this.response = response;
   }
 

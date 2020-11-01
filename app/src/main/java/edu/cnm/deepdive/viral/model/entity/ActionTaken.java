@@ -39,11 +39,11 @@ public class ActionTaken {
 
   @NonNull
   @ColumnInfo(name = "action_id")
-  private Action action;
+  private long action;
 
   @NonNull
   @ColumnInfo(name = "response_to_id")
-  private ActionResponse responseTo;
+  private long responseTo;
 
   @NonNull
   private String content; // Do I even need this if it can just reference the content of the action?
@@ -73,21 +73,19 @@ public class ActionTaken {
     this.timestamp = timestamp;
   }
 
-  @NonNull
-  public Action getAction() {
+  public long getAction() {
     return action;
   }
 
-  public void setAction(@NonNull Action action) {
+  public void setAction(long action) {
     this.action = action;
   }
 
-  @NonNull
-  public ActionResponse getResponseTo() {
+  public long getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(@NonNull ActionResponse responseTo) {
+  public void setResponseTo(long responseTo) {
     this.responseTo = responseTo;
   }
 
