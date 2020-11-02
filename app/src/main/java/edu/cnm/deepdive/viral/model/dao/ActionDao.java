@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.viral.model.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Action;
 import io.reactivex.Single;
@@ -29,6 +31,10 @@ public interface ActionDao {
   @Update
   Single<Integer> update(Collection<Action> actions);
 
-  // TODO Write queries.
+  @Query("SELECT * FROM `Action` WHERE action_id = :id")
+  LiveData<Action> selectSpecificAction(long id);
+
+  @Query("SELECT * FROM `Action` WHERE public = :isPublic AND demeanor_id = :demeanor ORDER BY appearance_chance DESC")
+  LiveData<List<Action>> selectActionByVisibility(boolean isPublic, long demeanor);
 
 }

@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.viral.model.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import io.reactivex.Single;
@@ -29,6 +31,10 @@ public interface DemeanorDao {
   @Update
   Single<Integer> update(Collection<Demeanor> demeanors);
 
-  // TODO Write queries.
+  @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id ORDER BY infection_min ASC")
+  LiveData<Demeanor> selectSpecificDemeanor(long id);
+
+  @Query("SELECT * FROM Demeanor WHERE infection_min >= :min AND infection_max <= :max ORDER BY infection_min ASC")
+  LiveData<List<Demeanor>> selectDemeanorsByInfectionLevel(int min, int max);
 
 }
