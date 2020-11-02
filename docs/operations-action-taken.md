@@ -47,8 +47,26 @@ Cardinality/modality
  
 Filter
 
-: friendId
+: public
  
 Sort order
 
 : timestamp, descending
+
+### Query: Get Messages By Friend
+
+Purpose
+
+: Query to get all messages from a specific friend.
+
+Cardinality/modality
+
+: many/optional
+ 
+Filter
+
+: friendId, public
+ 
+Sort order
+
+: timestamp, ascending

@@ -53,7 +53,7 @@ Sort order
 
 : appearanceChance, descending
 
-### Query: Get Available Actions by Visibility
+### Query: Get Available Actions by Demeanor and Visibility
 
 Purpose
 

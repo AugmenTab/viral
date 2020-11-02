@@ -35,6 +35,24 @@ For any queries (i.e. selecting from the database) that you think you will need 
 
 Copy and paste the section below as many times as necessary, for all of the queries you currently anticipate implementing for this entity.
 
+### Query: Get Specific Demeanor
+
+Purpose
+
+: Query to get details on a specific demeanor.
+
+Cardinality/modality
+
+: one/required
+ 
+Filter
+
+: infectionMin, infectionMax
+ 
+Sort order
+
+: infectionMin, ascending
+
 ### Query: Get Demeanors By Specified Infection Level
 
 Purpose
@@ -43,7 +61,7 @@ Purpose
 
 Cardinality/modality
 
-: one/required
+: many/required
  
 Filter
 

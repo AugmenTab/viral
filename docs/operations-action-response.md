@@ -65,8 +65,8 @@ Cardinality/modality
  
 Filter
 
-: demeanor, appearanceChance
+: demeanor
  
 Sort order
 
-: demeanor, ascending; appearanceChance, ascending
+: appearanceChance, ascending
