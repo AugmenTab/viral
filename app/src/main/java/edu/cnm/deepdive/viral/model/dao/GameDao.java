@@ -7,7 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import io.reactivex.Single;
-import java.util.Collection;
 import java.util.List;
 
 @Dao
