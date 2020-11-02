@@ -27,7 +27,6 @@ public class ActionResponse {
   @ColumnInfo(name = "response_to_id")
   private long responseTo;
 
-  @NonNull
   @ColumnInfo(name = "response_id")
   private long response;
 

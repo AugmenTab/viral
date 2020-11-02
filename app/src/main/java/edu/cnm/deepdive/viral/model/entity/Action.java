@@ -23,7 +23,6 @@ public class Action {
   @ColumnInfo(name = "public")
   private boolean isPublic;
 
-  @NonNull
   @ColumnInfo(name = "demeanor_id")
   private long demeanor;
 

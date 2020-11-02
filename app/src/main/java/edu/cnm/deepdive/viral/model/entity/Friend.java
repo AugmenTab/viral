@@ -31,7 +31,6 @@ public class Friend {
   @ColumnInfo(name = "infection_level")
   private int infectionLevel;
 
-  @NonNull
   @ColumnInfo(name = "demeanor_id")
   private long demeanor;
 
