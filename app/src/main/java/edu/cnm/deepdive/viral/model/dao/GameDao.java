@@ -16,20 +16,8 @@ public interface GameDao {
   @Insert
   Single<Long> insert(Game game);
 
-  @Insert
-  Single<List<Long>> insert(Game... games);
-
-  @Insert
-  Single<List<Long>> insert(Collection<Game> games);
-
   @Update
   Single<Integer> update(Game game);
-
-  @Update
-  Single<Integer> update(Game... games);
-
-  @Update
-  Single<Integer> update(Collection<Game> games);
 
   @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
   LiveData<List<Game>> selectAll();
