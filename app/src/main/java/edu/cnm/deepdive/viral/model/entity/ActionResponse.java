@@ -4,20 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = {
-    @ForeignKey(
-        entity = Action.class,
-        parentColumns = "action_id",
-        childColumns = "response_to_id"
-    ),
-    @ForeignKey(
-        entity = Action.class,
-        parentColumns = "action_id",
-        childColumns = "response_id"
-    )
-})
+@Entity(
+    foreignKeys = {
+      @ForeignKey(
+          entity = Action.class,
+          parentColumns = "action_id",
+          childColumns = "response_to_id"
+      ),
+      @ForeignKey(
+          entity = Action.class,
+          parentColumns = "action_id",
+          childColumns = "response_id"
+      )
+    },
+    indices = {
+      @Index(value = "response_to_id", unique = true)
+    }
+)
 public class ActionResponse {
 
   @PrimaryKey(autoGenerate = true)

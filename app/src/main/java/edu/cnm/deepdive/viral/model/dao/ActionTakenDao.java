@@ -50,10 +50,10 @@ public interface ActionTakenDao {
   Single<Integer> delete(ActionTaken actionTaken);
 
   @Delete
-  Single<List<Integer>> delete(ActionTaken... actionsTaken);
+  Single<Integer> delete(ActionTaken... actionsTaken);
 
   @Delete
-  Single<List<Integer>> delete(Collection<ActionTaken> actionsTaken);
+  Single<Integer> delete(Collection<ActionTaken> actionsTaken);
 
   @Query(FEED_ACTIONS_QUERY)
   LiveData<List<ActionTaken>> selectFeedActions();

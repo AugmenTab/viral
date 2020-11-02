@@ -30,18 +30,15 @@ public class ActionTaken {
   @ColumnInfo(name = "action_taken_id")
   private long id;
 
-  @NonNull
   @ColumnInfo(name = "friend_id")
-  private Friend friend;
+  private long friend;
 
   @NonNull
   private Date timestamp;
 
-  @NonNull
   @ColumnInfo(name = "action_id")
   private long action;
 
-  @NonNull
   @ColumnInfo(name = "response_to_id")
   private long responseTo;
 
@@ -56,11 +53,11 @@ public class ActionTaken {
     this.id = id;
   }
 
-  public Friend getFriend() {
+  public long getFriend() {
     return friend;
   }
 
-  public void setFriend(Friend friend) {
+  public void setFriend(long friend) {
     this.friend = friend;
   }
 
@@ -97,5 +94,4 @@ public class ActionTaken {
   public void setContent(@NonNull String content) {
     this.content = content;
   }
-
 }
