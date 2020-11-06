@@ -55,6 +55,8 @@ public interface ActionTakenDao {
   @Delete
   Single<Integer> delete(Collection<ActionTaken> actionsTaken);
 
+  // TODO: Add query to get single ActionTaken. Do the same for other DAOs, if applicable.
+
   @Query(FEED_ACTIONS_QUERY)
   LiveData<List<ActionTaken>> selectFeedActions();
 
