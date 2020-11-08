@@ -57,6 +57,9 @@ public interface ActionTakenDao {
 
   // TODO: Add query to get single ActionTaken. Do the same for other DAOs, if applicable.
 
+  @Query("SELECT * FROM ActionTaken WHERE action_taken_id = :id")
+  LiveData<ActionTaken> selectSpecificActionTaken(long id);
+
   @Query(FEED_ACTIONS_QUERY)
   LiveData<List<ActionTaken>> selectFeedActions();
 
