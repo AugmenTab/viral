@@ -9,19 +9,20 @@ import androidx.room.PrimaryKey;
 
 @Entity(
     foreignKeys = {
-      @ForeignKey(
-          entity = Action.class,
-          parentColumns = "action_id",
-          childColumns = "response_to_id"
-      ),
-      @ForeignKey(
-          entity = Action.class,
-          parentColumns = "action_id",
-          childColumns = "response_id"
-      )
+        @ForeignKey(
+            entity = Action.class,
+            parentColumns = "action_id",
+            childColumns = "response_to_id"
+        ),
+        @ForeignKey(
+            entity = Action.class,
+            parentColumns = "action_id",
+            childColumns = "response_id"
+        )
     },
     indices = {
-      @Index(value = "response_to_id", unique = true)
+        @Index(value = "response_to_id", unique = true),
+        @Index(value = "response_id")
     }
 )
 public class ActionResponse {

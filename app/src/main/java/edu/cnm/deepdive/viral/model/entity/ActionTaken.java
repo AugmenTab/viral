@@ -4,26 +4,34 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import java.util.Date;
 
-@Entity(foreignKeys = {
-    @ForeignKey(
-        entity = Action.class,
-        parentColumns = "action_id",
-        childColumns = "action_id"
-    ),
-    @ForeignKey(
-        entity = ActionResponse.class,
-        parentColumns = "response_to_id",
-        childColumns = "response_to_id"
-    ),
-    @ForeignKey(
-        entity = Friend.class,
-        parentColumns = "friend_id",
-        childColumns = "friend_id"
-    )
-})
+@Entity(
+    foreignKeys = {
+        @ForeignKey(
+            entity = Action.class,
+            parentColumns = "action_id",
+            childColumns = "action_id"
+        ),
+        @ForeignKey(
+            entity = ActionResponse.class,
+            parentColumns = "response_to_id",
+            childColumns = "response_to_id"
+        ),
+        @ForeignKey(
+            entity = Friend.class,
+            parentColumns = "friend_id",
+            childColumns = "friend_id"
+        )
+    },
+    indices = {
+        @Index(value = "action_id"),
+        @Index(value = "response_to_id"),
+        @Index(value = "friend_id")
+    }
+)
 public class ActionTaken {
 
   @PrimaryKey(autoGenerate = true)

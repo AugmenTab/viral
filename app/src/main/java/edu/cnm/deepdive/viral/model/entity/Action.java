@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(
-    entity = Demeanor.class,
-    parentColumns = "demeanor_id",
-    childColumns = "demeanor_id"
-))
+@Entity(
+    foreignKeys = @ForeignKey(
+        entity = Demeanor.class,
+        parentColumns = "demeanor_id",
+        childColumns = "demeanor_id"
+    ),
+    indices = {@Index(value = "demeanor_id")}
+)
 public class Action {
 
   @PrimaryKey(autoGenerate = true)
