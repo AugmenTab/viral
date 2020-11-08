@@ -31,7 +31,7 @@ public interface DemeanorDao {
   @Update
   Single<Integer> update(Collection<Demeanor> demeanors);
 
-  @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id ORDER BY infection_min ASC")
+  @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id")
   LiveData<Demeanor> selectSpecificDemeanor(long id);
 
   @Query("SELECT * FROM Demeanor WHERE infection_min >= :min AND infection_max <= :max ORDER BY infection_min ASC")

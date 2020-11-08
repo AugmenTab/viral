@@ -41,7 +41,7 @@ public interface FriendDao {
   @Delete
   Single<Integer> delete(Collection<Friend> friends);
 
-  @Query("SELECT * FROM Friend WHERE friend_id = :id ORDER BY name ASC")
+  @Query("SELECT * FROM Friend WHERE friend_id = :id")
   LiveData<Friend> selectSpecificFriend(long id);
 
   @Query("SELECT * FROM Friend WHERE active = :active ORDER BY infection_level ASC")
