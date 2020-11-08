@@ -31,8 +31,9 @@ public class ActionResponse {
   @ColumnInfo(name = "action_response_id")
   private long id;
 
+  @NonNull
   @ColumnInfo(name = "response_to_id")
-  private long responseTo;
+  private Long responseTo;
 
   @ColumnInfo(name = "response_id")
   private long response;
@@ -48,11 +49,12 @@ public class ActionResponse {
     this.id = id;
   }
 
-  public long getResponseTo() {
+  @NonNull
+  public Long getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(long responseTo) {
+  public void setResponseTo(@NonNull Long responseTo) {
     this.responseTo = responseTo;
   }
 

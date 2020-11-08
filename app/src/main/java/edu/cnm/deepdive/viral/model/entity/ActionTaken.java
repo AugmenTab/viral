@@ -48,7 +48,7 @@ public class ActionTaken {
   private long action;
 
   @ColumnInfo(name = "response_to_id")
-  private long responseTo;
+  private Long responseTo;
 
   @NonNull
   private String content; // Do I even need this if it can just reference the content of the action?
@@ -86,11 +86,11 @@ public class ActionTaken {
     this.action = action;
   }
 
-  public long getResponseTo() {
+  public Long getResponseTo() {
     return responseTo;
   }
 
-  public void setResponseTo(long responseTo) {
+  public void setResponseTo(Long responseTo) {
     this.responseTo = responseTo;
   }
 
@@ -102,4 +102,5 @@ public class ActionTaken {
   public void setContent(@NonNull String content) {
     this.content = content;
   }
+
 }
