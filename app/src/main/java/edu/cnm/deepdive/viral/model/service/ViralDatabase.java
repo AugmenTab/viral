@@ -78,20 +78,6 @@ public abstract class ViralDatabase extends RoomDatabase {
       return (value != null) ? new Date(value) : null;
     }
 
-    // TODO: Boolean converters are not needed.
-
-    @TypeConverter
-    // boolean to int
-    public static int booleanToInt(boolean value) {
-      return value ? 1 : 0;
-    }
-
-    @TypeConverter
-    // int to boolean
-    public static boolean intToBoolean(int value) {
-      return value == 1;
-    }
-
   }
 
 }
