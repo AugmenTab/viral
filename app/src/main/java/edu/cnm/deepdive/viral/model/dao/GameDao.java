@@ -18,10 +18,13 @@ public interface GameDao {
   @Update
   Single<Integer> update(Game game);
 
-  @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
-  LiveData<List<Game>> selectAll();
+  @Query("SELECT * FROM Game WHERE game_id = :id")
+  LiveData<Game> getSpecificGame(long id);
 
   @Query("SELECT * FROM Game WHERE end_time IS NULL")
-  LiveData<Game> selectCurrent();
-  
+  LiveData<Game> getCurrentGame();
+
+  @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
+  LiveData<List<Game>> getAllCompletedGames();
+
 }
