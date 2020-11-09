@@ -13,30 +13,10 @@ public class GameRepository {
   private final Context context;
   private final GameDao gameDao;
 
-  public GameRepository(Context context, GameDao gameDao) {
+  public GameRepository(Context context) {
     this.context = context;
     ViralDatabase database = ViralDatabase.getInstance();
     gameDao = database.getGameDao();
   }
-
-  private Game newGame() {
-    Game game = new Game();
-    gameDao.insert(game);
-    return game;
-  }
-
-  public LiveData<Game> getGame() {
-    return gameDao.getCurrentGame();
-  }
-
-  public LiveData<List<Game>> getAllCompletedGames() {
-    return gameDao.getAllCompletedGames();
-  }
-
-  public Single<Integer> saveGame(Game game) {
-    return gameDao.update(game);
-  }
-
-  // TODO: Ask if delete is necessary here. Don't particularly want to delete game records.
 
 }
