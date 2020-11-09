@@ -25,6 +25,7 @@ import java.util.Date;
             parentColumns = "friend_id",
             childColumns = "friend_id"
         )
+        // what sort of onDeletes are required if dependent entities are deleted together?
     },
     indices = {
         @Index(value = {"action_id"}),

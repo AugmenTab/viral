@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey;
         entity = Demeanor.class,
         parentColumns = "demeanor_id",
         childColumns = "demeanor_id"
+        // what sort of onDeletes are required if dependent entities are deleted together?
     ),
     indices = {
         @Index(value = {"name"}, unique = true),
