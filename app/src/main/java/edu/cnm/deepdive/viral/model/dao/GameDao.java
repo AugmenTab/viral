@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.model.pojo.ScoreSummary;
@@ -14,12 +15,12 @@ import java.util.List;
 public interface GameDao {
 
   String AVERAGE_FRIENDS_LEFT_SUMMARY_QUERY =
-      "SELECT moves, AVG(friends_left) AS average_friends_left "
+      "SELECT AVG(friends_left) AS average_friends_left, AVG(moves) as average_moves "
           + "FROM Game "
           + "ORDER BY average_friends_left DESC";
 
   String AVERAGE_MOVES_SUMMARY_QUERY =
-      "SELECT friends_left, AVG(moves) as average_moves "
+      "SELECT AVG(friends_left) AS average_friends_left, AVG(moves) as average_moves "
           + "FROM Game "
           + "ORDER BY average_moves ASC";
 
@@ -39,9 +40,10 @@ public interface GameDao {
   LiveData<List<Game>> selectAllCompletedGames();
 
   @Query(AVERAGE_FRIENDS_LEFT_SUMMARY_QUERY)
-  LiveData<List<ScoreSummary>> selectSummaryByFriendsLeft();
+  LiveData<ScoreSummary> selectSummaryByFriendsLeft();
 
+  @Transaction
   @Query(AVERAGE_MOVES_SUMMARY_QUERY)
-  LiveData<List<ScoreSummary>> selectSummaryByMoves();
+  LiveData<ScoreSummary> selectSummaryByMoves();
 
 }

@@ -31,11 +31,11 @@ public class GameRepository {
     return gameDao.selectAllCompletedGames();
   }
 
-  public LiveData<List<ScoreSummary>> getSummariesByFriendsLeft() {
+  public LiveData<ScoreSummary> getSummariesByFriendsLeft() {
     return gameDao.selectSummaryByFriendsLeft();
   }
 
-  public LiveData<List<ScoreSummary>> getSummariesByMoves() {
+  public LiveData<ScoreSummary> getSummariesByMoves() {
     return gameDao.selectSummaryByMoves();
   }
 
