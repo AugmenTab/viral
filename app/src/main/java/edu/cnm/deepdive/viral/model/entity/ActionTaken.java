@@ -32,6 +32,7 @@ import java.util.Date;
         @Index(value = {"friend_id"})
     }
 )
+@SuppressWarnings({"NullableProblems", "NotNullFieldNotInitialized"})
 public class ActionTaken {
 
   @PrimaryKey(autoGenerate = true)
@@ -42,7 +43,7 @@ public class ActionTaken {
   private long friend;
 
   @NonNull
-  private Date timestamp;
+  private Date timestamp = new Date();
 
   @ColumnInfo(name = "action_id")
   private long action;

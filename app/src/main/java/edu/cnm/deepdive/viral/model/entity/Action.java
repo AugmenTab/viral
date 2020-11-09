@@ -15,6 +15,7 @@ import androidx.room.PrimaryKey;
     ),
     indices = {@Index(value = {"demeanor_id"})}
 )
+@SuppressWarnings({"NullableProblems", "NotNullFieldNotInitialized"})
 public class Action {
 
   @PrimaryKey(autoGenerate = true)

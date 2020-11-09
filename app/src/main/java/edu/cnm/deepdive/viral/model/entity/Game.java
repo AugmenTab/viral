@@ -7,6 +7,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import java.util.Date;
 
+@SuppressWarnings("NullableProblems")
 @Entity(indices = {
     @Index(value = {"start_time"}, unique = true),
     @Index(value = {"end_time"}, unique = true)
@@ -19,7 +20,7 @@ public class Game {
 
   @NonNull
   @ColumnInfo(name = "start_time")
-  private Date startTime;
+  private Date startTime = new Date();
 
   @ColumnInfo(name = "end_time")
   private Date endTime;

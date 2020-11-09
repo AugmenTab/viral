@@ -7,6 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+@SuppressWarnings({"NullableProblems", "NotNullFieldNotInitialized"})
 @Entity(
     foreignKeys = @ForeignKey(
         entity = Demeanor.class,

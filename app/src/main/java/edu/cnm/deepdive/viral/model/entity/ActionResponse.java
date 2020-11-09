@@ -25,6 +25,7 @@ import androidx.room.PrimaryKey;
         @Index(value = {"response_id"})
     }
 )
+@SuppressWarnings({"NullableProblems", "NotNullFieldNotInitialized"})
 public class ActionResponse {
 
   @PrimaryKey(autoGenerate = true)

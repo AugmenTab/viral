@@ -7,6 +7,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(indices = @Index(value = {"name"}, unique = true))
+@SuppressWarnings({"NullableProblems", "NotNullFieldNotInitialized"})
 public class Demeanor {
 
   @PrimaryKey(autoGenerate = true)
