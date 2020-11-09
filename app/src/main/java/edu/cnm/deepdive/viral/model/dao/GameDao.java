@@ -26,6 +26,6 @@ public interface GameDao {
   LiveData<Game> selectCurrentGame();
 
   @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
-  LiveData<List<Game>> getAllCompletedGames();
+  LiveData<List<Game>> selectAllCompletedGames();
 
 }
