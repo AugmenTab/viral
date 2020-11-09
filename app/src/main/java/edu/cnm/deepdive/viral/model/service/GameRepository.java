@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.viral.model.dao.GameDao;
 import edu.cnm.deepdive.viral.model.entity.Game;
+import edu.cnm.deepdive.viral.model.pojo.ScoreSummary;
 import io.reactivex.Completable;
 import java.util.List;
 
@@ -28,6 +29,14 @@ public class GameRepository {
 
   public LiveData<List<Game>> getAllCompletedGames() {
     return gameDao.selectAllCompletedGames();
+  }
+
+  public LiveData<List<ScoreSummary>> getSummariesByFriendsLeft() {
+    return gameDao.selectSummaryByFriendsLeft();
+  }
+
+  public LiveData<List<ScoreSummary>> getSummariesByMoves() {
+    return gameDao.selectSummaryByMoves();
   }
 
   public Completable save(Game game) {

@@ -13,6 +13,16 @@ import java.util.List;
 @Dao
 public interface GameDao {
 
+  String AVERAGE_FRIENDS_LEFT_SUMMARY_QUERY =
+      "SELECT moves, AVG(friends_left) AS average_friends_left "
+          + "FROM Game "
+          + "ORDER BY average_friends_left DESC";
+
+  String AVERAGE_MOVES_SUMMARY_QUERY =
+      "SELECT friends_left, AVG(moves) as average_moves "
+          + "FROM Game "
+          + "ORDER BY average_moves ASC";
+
   @Insert
   Single<Long> insert(Game game);
 
@@ -27,5 +37,11 @@ public interface GameDao {
 
   @Query("SELECT * FROM Game WHERE end_time IS NOT NULL ORDER BY friends_left ASC, moves ASC")
   LiveData<List<Game>> selectAllCompletedGames();
+
+  @Query(AVERAGE_FRIENDS_LEFT_SUMMARY_QUERY)
+  LiveData<List<ScoreSummary>> selectSummaryByFriendsLeft();
+
+  @Query(AVERAGE_MOVES_SUMMARY_QUERY)
+  LiveData<List<ScoreSummary>> selectSummaryByMoves();
 
 }
