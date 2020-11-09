@@ -50,7 +50,7 @@ The game will be data-driven, with all possible text displayed during the game l
 ## Device/external services
 
 **Device Services:**
-* camera
+* This app will use the [Camera](https://developer.android.com/guide/topics/media/camera#:~:text=%20Camera%20API%20%201%20Saving%20media%20files.,fields%20that%20require%20permission.%20LENS_POSE_REFERENCE%20LENS_INFO_HYPERFOCAL_DISTANCE...%20More%20) to take a profile picture for the user at the start of each new game.
 
 **External Services:**
 * [Leaflet.js](https://leafletjs.com/reference-1.7.1.html)
@@ -64,6 +64,8 @@ The game will be data-driven, with all possible text displayed during the game l
 ## Technical Design
 
 * [Entity-Relationship Diagram](entity-relationship.md)
+* [Data Model Implementation](data-model-implementation.md)
+* [DDL](ddl.md)
 
 ## Stretch goals/possible enhancements 
 
