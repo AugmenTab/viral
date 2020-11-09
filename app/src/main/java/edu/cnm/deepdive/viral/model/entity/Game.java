@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity(indices = {
-    @Index(value = "start_time", unique = true),
-    @Index(value = "end_time", unique = true)
+    @Index(value = {"start_time"}, unique = true),
+    @Index(value = {"end_time"}, unique = true)
 })
 public class Game {
 

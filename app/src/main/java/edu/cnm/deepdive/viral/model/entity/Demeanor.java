@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = @Index(value = "name", unique = true))
+@Entity(indices = @Index(value = {"name"}, unique = true))
 public class Demeanor {
 
   @PrimaryKey(autoGenerate = true)

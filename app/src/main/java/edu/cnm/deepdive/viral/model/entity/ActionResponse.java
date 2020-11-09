@@ -21,8 +21,8 @@ import androidx.room.PrimaryKey;
         )
     },
     indices = {
-        @Index(value = "response_to_id", unique = true),
-        @Index(value = "response_id")
+        @Index(value = {"response_to_id"}, unique = true),
+        @Index(value = {"response_id"})
     }
 )
 public class ActionResponse {

@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
         parentColumns = "demeanor_id",
         childColumns = "demeanor_id"
     ),
-    indices = {@Index(value = "demeanor_id")}
+    indices = {@Index(value = {"demeanor_id"})}
 )
 public class Action {
 

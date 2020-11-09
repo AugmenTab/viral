@@ -27,9 +27,9 @@ import java.util.Date;
         )
     },
     indices = {
-        @Index(value = "action_id"),
-        @Index(value = "response_to_id"),
-        @Index(value = "friend_id")
+        @Index(value = {"action_id"}),
+        @Index(value = {"response_to_id"}),
+        @Index(value = {"friend_id"})
     }
 )
 public class ActionTaken {

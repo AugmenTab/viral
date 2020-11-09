@@ -14,10 +14,10 @@ import androidx.room.PrimaryKey;
         childColumns = "demeanor_id"
     ),
     indices = {
-        @Index(value = "name", unique = true),
-        @Index(value = "address", unique = true),
-        @Index(value = "profile_picture", unique = true),
-        @Index(value = "demeanor_id")
+        @Index(value = {"name"}, unique = true),
+        @Index(value = {"address"}, unique = true),
+        @Index(value = {"profile_picture"}, unique = true),
+        @Index(value = {"demeanor_id"})
     }
 )
 public class Friend {
