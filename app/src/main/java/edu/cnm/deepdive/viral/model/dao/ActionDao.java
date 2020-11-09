@@ -6,12 +6,19 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Action;
+import edu.cnm.deepdive.viral.model.pojo.DemeanorWithActions;
 import io.reactivex.Single;
 import java.util.Collection;
 import java.util.List;
 
 @Dao
 public interface ActionDao {
+
+  String SELECT_ACTION_BY_VISIBILITY_QUERY =
+      "SELECT * "
+          + "FROM `Action` "
+          + "WHERE public = :isPublic AND demeanor_id = :demeanor "
+          + "ORDER BY appearance_chance DESC";
 
   @Insert
   Single<Long> insert(Action action);
@@ -34,7 +41,10 @@ public interface ActionDao {
   @Query("SELECT * FROM `Action` WHERE action_id = :id")
   LiveData<Action> selectSpecificAction(long id);
 
-  @Query("SELECT * FROM `Action` WHERE public = :isPublic AND demeanor_id = :demeanor ORDER BY appearance_chance DESC")
-  LiveData<List<Action>> selectActionByVisibility(boolean isPublic, long demeanor);
+  @Query(SELECT_ACTION_BY_VISIBILITY_QUERY)
+  LiveData<List<Action>> selectActionsByVisibility(boolean isPublic, long demeanor);
+
+  @Query("SELECT * FROM `Action` WHERE demeanor_id = :id ORDER BY appearance_chance DESC")
+  LiveData<List<DemeanorWithActions>> selectActionsForSpecificDemeanor(long id);
 
 }

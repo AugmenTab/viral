@@ -6,12 +6,19 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
+import edu.cnm.deepdive.viral.model.pojo.DemeanorWithActions;
 import io.reactivex.Single;
 import java.util.Collection;
 import java.util.List;
 
 @Dao
 public interface DemeanorDao {
+
+  String SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY =
+      "SELECT * "
+          + "FROM Demeanor "
+          + "WHERE infection_min >= :min AND infection_max <= :max "
+          + "ORDER BY infection_min ASC";
 
   @Insert
   Single<Long> insert(Demeanor demeanor);
@@ -34,7 +41,7 @@ public interface DemeanorDao {
   @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id")
   LiveData<Demeanor> selectSpecificDemeanor(long id);
 
-  @Query("SELECT * FROM Demeanor WHERE infection_min >= :min AND infection_max <= :max ORDER BY infection_min ASC")
+  @Query(SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY)
   LiveData<List<Demeanor>> selectDemeanorsByInfectionLevel(int min, int max);
 
 }
