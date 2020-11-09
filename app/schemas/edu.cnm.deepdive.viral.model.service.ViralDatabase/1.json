@@ -1,0 +1,481 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "62f68fcef27e7065428e4d539f47fff7",
+    "entities": [
+      {
+        "tableName": "Game",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start_time` INTEGER NOT NULL, `end_time` INTEGER, `moves` INTEGER, `friends_left` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "game_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startTime",
+            "columnName": "start_time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endTime",
+            "columnName": "end_time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "moves",
+            "columnName": "moves",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "friendsLeft",
+            "columnName": "friends_left",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "game_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Game_start_time",
+            "unique": true,
+            "columnNames": [
+              "start_time"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Game_start_time` ON `${TABLE_NAME}` (`start_time`)"
+          },
+          {
+            "name": "index_Game_end_time",
+            "unique": true,
+            "columnNames": [
+              "end_time"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Game_end_time` ON `${TABLE_NAME}` (`end_time`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Friend",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`friend_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `infection_level` INTEGER NOT NULL, `demeanor_id` INTEGER NOT NULL, `active` INTEGER NOT NULL, `address` INTEGER NOT NULL, `profile_picture` TEXT NOT NULL, FOREIGN KEY(`demeanor_id`) REFERENCES `Demeanor`(`demeanor_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "friend_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "infectionLevel",
+            "columnName": "infection_level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "demeanor",
+            "columnName": "demeanor_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "active",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profilePicture",
+            "columnName": "profile_picture",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "friend_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Friend_name",
+            "unique": true,
+            "columnNames": [
+              "name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_name` ON `${TABLE_NAME}` (`name`)"
+          },
+          {
+            "name": "index_Friend_address",
+            "unique": true,
+            "columnNames": [
+              "address"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_address` ON `${TABLE_NAME}` (`address`)"
+          },
+          {
+            "name": "index_Friend_profile_picture",
+            "unique": true,
+            "columnNames": [
+              "profile_picture"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `${TABLE_NAME}` (`profile_picture`)"
+          },
+          {
+            "name": "index_Friend_demeanor_id",
+            "unique": false,
+            "columnNames": [
+              "demeanor_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Friend_demeanor_id` ON `${TABLE_NAME}` (`demeanor_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Demeanor",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "demeanor_id"
+            ],
+            "referencedColumns": [
+              "demeanor_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Demeanor",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`demeanor_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `starting_chance` INTEGER NOT NULL, `infection_min` INTEGER NOT NULL, `infection_max` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "demeanor_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startingChance",
+            "columnName": "starting_chance",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "infectionMin",
+            "columnName": "infection_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "infectionMax",
+            "columnName": "infection_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "demeanor_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Demeanor_name",
+            "unique": true,
+            "columnNames": [
+              "name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Demeanor_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Action",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `public` INTEGER NOT NULL, `demeanor_id` INTEGER NOT NULL, `appearance_chance` INTEGER NOT NULL, FOREIGN KEY(`demeanor_id`) REFERENCES `Demeanor`(`demeanor_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "action_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPublic",
+            "columnName": "public",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "demeanor",
+            "columnName": "demeanor_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appearanceChance",
+            "columnName": "appearance_chance",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "action_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Action_demeanor_id",
+            "unique": false,
+            "columnNames": [
+              "demeanor_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Action_demeanor_id` ON `${TABLE_NAME}` (`demeanor_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Demeanor",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "demeanor_id"
+            ],
+            "referencedColumns": [
+              "demeanor_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ActionResponse",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_response_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `response_to_id` INTEGER NOT NULL, `response_id` INTEGER NOT NULL, `appearance_chance` INTEGER NOT NULL, FOREIGN KEY(`response_to_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "action_response_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "responseTo",
+            "columnName": "response_to_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "response",
+            "columnName": "response_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appearanceChance",
+            "columnName": "appearance_chance",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "action_response_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ActionResponse_response_to_id",
+            "unique": true,
+            "columnNames": [
+              "response_to_id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_ActionResponse_response_to_id` ON `${TABLE_NAME}` (`response_to_id`)"
+          },
+          {
+            "name": "index_ActionResponse_response_id",
+            "unique": false,
+            "columnNames": [
+              "response_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ActionResponse_response_id` ON `${TABLE_NAME}` (`response_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Action",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "response_to_id"
+            ],
+            "referencedColumns": [
+              "action_id"
+            ]
+          },
+          {
+            "table": "Action",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "response_id"
+            ],
+            "referencedColumns": [
+              "action_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ActionTaken",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_taken_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `friend_id` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `action_id` INTEGER NOT NULL, `response_to_id` INTEGER, `content` TEXT NOT NULL, FOREIGN KEY(`action_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_to_id`) REFERENCES `ActionResponse`(`response_to_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`friend_id`) REFERENCES `Friend`(`friend_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "action_taken_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "friend",
+            "columnName": "friend_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "action",
+            "columnName": "action_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "responseTo",
+            "columnName": "response_to_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "action_taken_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ActionTaken_action_id",
+            "unique": false,
+            "columnNames": [
+              "action_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ActionTaken_action_id` ON `${TABLE_NAME}` (`action_id`)"
+          },
+          {
+            "name": "index_ActionTaken_response_to_id",
+            "unique": false,
+            "columnNames": [
+              "response_to_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ActionTaken_response_to_id` ON `${TABLE_NAME}` (`response_to_id`)"
+          },
+          {
+            "name": "index_ActionTaken_friend_id",
+            "unique": false,
+            "columnNames": [
+              "friend_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ActionTaken_friend_id` ON `${TABLE_NAME}` (`friend_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Action",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "action_id"
+            ],
+            "referencedColumns": [
+              "action_id"
+            ]
+          },
+          {
+            "table": "ActionResponse",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "response_to_id"
+            ],
+            "referencedColumns": [
+              "response_to_id"
+            ]
+          },
+          {
+            "table": "Friend",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "friend_id"
+            ],
+            "referencedColumns": [
+              "friend_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '62f68fcef27e7065428e4d539f47fff7')"
+    ]
+  }
+}

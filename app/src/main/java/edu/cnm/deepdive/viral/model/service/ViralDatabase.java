@@ -30,7 +30,8 @@ import java.util.Date;
         ActionResponse.class,
         ActionTaken.class
     },
-    version = 1
+    version = 1,
+    exportSchema = true
 )
 @TypeConverters({Converters.class})
 public abstract class ViralDatabase extends RoomDatabase {
