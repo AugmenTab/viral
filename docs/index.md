@@ -20,7 +20,7 @@ The player will use clues about the friends from their profiles and posts to det
 
 1. By installing and launching the app, the player is brought to a "sign-up" page, as if it were a social media app.
 2. They create an account, which has them enter a number of parameters required for the game, including taking a profile picture with the device's camera and determining the difficulty of the game. The game will generate a "friend's list" using random values in the databases.
-3. Once the account is created, the player is given a skippable tutorial that shows them how to navigate the various pages, create or delete posts and comments, and change the display theme of the app.
+3. Once the account is created, the player is given a skippable tutorial that shows them how to navigate the various pages and create or delete posts and comments.
 4. After the tutorial, the player is given a number of "free turns" based on their difficulty selection to explore the app and get a feel for the layout and options available to them. A turn can contain a number of specific actions, but a handful of key actions bring a turn to an end:
     * messaging someone through the app's messenger
     * commenting on a post or profile
