@@ -2,6 +2,7 @@ package edu.cnm.deepdive.viral.model.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -38,6 +39,12 @@ public interface ActionDao {
 
   @Update
   Single<Integer> update(Collection<Action> actions);
+
+  @Delete
+  Single<Integer> delete(Action... actions);
+
+  @Delete
+  Single<Integer> delete(Collection<Action> actions);
 
   @Query("SELECT * FROM `Action` WHERE action_id = :id")
   LiveData<Action> selectSpecificAction(long id);

@@ -2,6 +2,7 @@ package edu.cnm.deepdive.viral.model.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -36,6 +37,12 @@ public interface DemeanorDao {
 
   @Update
   Single<Integer> update(Collection<Demeanor> demeanors);
+
+  @Delete
+  Single<Integer> delete(Demeanor... demeanors);
+
+  @Delete
+  Single<Integer> delete(Collection<Demeanor> demeanors);
 
   @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id")
   LiveData<Demeanor> selectSpecificDemeanor(long id);

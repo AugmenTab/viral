@@ -30,6 +30,8 @@ public interface GameDao {
   @Update
   Single<Integer> update(Game game);
 
+  // Game records will not be deleted.
+
   @Query("SELECT * FROM Game WHERE game_id = :id")
   LiveData<Game> selectSpecificGame(long id);
 

@@ -2,6 +2,7 @@ package edu.cnm.deepdive.viral.model.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -37,6 +38,12 @@ public interface ActionResponseDao {
 
   @Update
   Single<Integer> update(Collection<ActionResponse> actionResponses);
+
+  @Delete
+  Single<Integer> delete(ActionResponse... actionResponses);
+
+  @Delete
+  Single<Integer> delete(Collection<ActionResponse> actionResponses);
 
   // TODO: Get help from Nick on this section, and how to join the tables.
   @Query("SELECT * FROM ActionResponse WHERE action_response_id = :id")
