@@ -38,11 +38,7 @@ public interface DemeanorDao {
   @Update
   Single<Integer> update(Collection<Demeanor> demeanors);
 
-  @Delete
-  Single<Integer> delete(Demeanor... demeanors);
-
-  @Delete
-  Single<Integer> delete(Collection<Demeanor> demeanors);
+  // Demeanors will not be deleted - they will persist between games.
 
   @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id")
   LiveData<Demeanor> selectSpecificDemeanor(long id);
