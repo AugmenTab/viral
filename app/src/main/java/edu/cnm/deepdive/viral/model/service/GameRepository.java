@@ -45,5 +45,11 @@ public class GameRepository {
         : gameDao.update(game).ignoreElement();
   }
 
+  public Completable delete(Game game) {
+    return (game.getId() == 0)
+        ? Completable.complete()
+        : gameDao.delete(game).ignoreElement();
+  }
+
 }
 

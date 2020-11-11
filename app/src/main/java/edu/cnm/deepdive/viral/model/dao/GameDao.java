@@ -2,6 +2,7 @@ package edu.cnm.deepdive.viral.model.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -30,7 +31,8 @@ public interface GameDao {
   @Update
   Single<Integer> update(Game game);
 
-  // Game records will not be deleted.
+  @Delete
+  Single<Integer> delete(Game game);
 
   @Query("SELECT * FROM Game WHERE game_id = :id")
   LiveData<Game> selectSpecificGame(long id);
