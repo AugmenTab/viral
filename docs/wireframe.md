@@ -1,3 +1,3 @@
-# Entity-Relationship Diagram
+# Wireframe
 
 [![Wireframe Diagram](img/wireframe.png)](pdf/wireframe.pdf)

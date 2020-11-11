@@ -11,12 +11,12 @@
 
 ## DAO Interfaces
 
-* [Game](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/GameDao.java)
-* [Friend](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/FriendDao.java)
-* [Demeanor](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/DemeanorDao.java)
-* [Action](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionDao.java)
-* [ActionResponse](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionResponseDao.java)
-* [ActionTaken](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionTakenDao.java)
+* [GameDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/GameDao.java)
+* [FriendDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/FriendDao.java)
+* [DemeanorDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/DemeanorDao.java)
+* [ActionDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionDao.java)
+* [ActionResponseDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionResponseDao.java)
+* [ActionTakenDao](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/dao/ActionTakenDao.java)
 
 ## POJOs
 

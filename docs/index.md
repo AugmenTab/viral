@@ -1,10 +1,10 @@
 ## Summary
 
-The goal of this personal Android project will be to develop an as-of-yet-unnamed mobile game. It will be a turn-based strategy game set inside a social media app. 
+The goal of this personal Android project will be to develop a mobile game called Viral. It will be a single-player turn-based strategy game set inside a social media app. 
 
-After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player.
+After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" the friends on their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player.
 
-The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
+The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness, and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
 
 ## Intended users
 
@@ -19,19 +19,19 @@ The player will use clues about the friends from their profiles and posts to det
 ## Functionality
 
 1. By installing and launching the app, the player is brought to a "sign-up" page, as if it were a social media app.
-2. They create an account, which has them enter a number of parameters required for the game, including taking a profile picture with the device's camera and determining the difficulty of the game. The game will generate a "friend's list" using random values in the databases.
+2. They "create an account," which has them enter a number of parameters required for the game, including taking a profile picture with the device's camera and determining the difficulty of the game. The game will generate a "friends list" using random values in the databases.
 3. Once the account is created, the player is given a skippable tutorial that shows them how to navigate the various pages and create or delete posts and comments.
-4. After the tutorial, the player is given a number of "free turns" based on their difficulty selection to explore the app and get a feel for the layout and options available to them. A turn can contain a number of specific actions, but a handful of key actions bring a turn to an end:
+4. After the tutorial, the player is given a number of "free turns" to explore the app and get a feel for the layout and options available to them. A turn can contain a number of specific actions, but a handful of key actions bring a turn to an end:
     * messaging someone through the app's messenger
     * commenting on a post or profile
     * deleting someone from the friend's list
-    * the illness can make an extra turn every x minutes the player spends in the same turn, based on difficulty (0 for lowest, increasing as difficulty increases)
+    * the illness can make an extra turn every x minutes the player spends in the same turn
 5. Once the free turns have passed, the "illness" takes its first turn, and play begins. The illness's turn consists of performing one or more of the following actions, depending on difficulty:
     * adding a number of infections to friends on the player's friends list
         * as infection stages increase, this can cause infections to chain to multiple friends with a single "move"
-    * sending messages or making posts in the app on the behalf of NPCs
+    * sending a number of messages or making a number of posts and comments in the app on the behalf of NPCs
 6. The player and the illness trade turns until the game ends.
-    * The player can end the game early by choosing to delete their account. This will kick them back to the "sign-up" page, where they can create a new account and start again.
+    * The player can end the game early by choosing to delete their account. This will kick them back to the "sign-up" page, where they can "create a new account" and start again.
     * **Nothing** created or stored by the game using the device services is saved past the end of a game - it wipes all pictures taken immediately once the game ends. If the player wishes to save these for whatever reason, an option will be available in the game menu, but it is not done by default.
 
 ## Persistent data

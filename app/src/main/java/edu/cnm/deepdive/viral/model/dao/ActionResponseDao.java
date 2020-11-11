@@ -45,7 +45,6 @@ public interface ActionResponseDao {
   @Delete
   Single<Integer> delete(Collection<ActionResponse> actionResponses);
 
-  // TODO: Get help from Nick on this section, and how to join the tables.
   @Query("SELECT * FROM ActionResponse WHERE action_response_id = :id")
   LiveData<ActionResponse> selectSpecificResponse(long id);
 
