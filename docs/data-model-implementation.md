@@ -23,6 +23,10 @@
 * [ScoreSummary](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/pojo/ScoreSummary.java)
 * [DemeanorWithActions](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/pojo/DemeanorWithActions.java)
 
+## Repository Classes
+* [GameRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/GameRepository.java)
+* [DemeanorRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/DemeanorRepository.java)
+
 ## Database Class
 
 * [ViralDatabase](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/ViralDatabase.java)
