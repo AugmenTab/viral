@@ -2,9 +2,9 @@
 
 The goal of this personal Android project will be to develop an as-of-yet-unnamed mobile game. It will be a turn-based strategy game set inside a social media app. 
 
-After setting up their account on the fledgling platform, control of the player's account is partially seized by some unidentified outside entity (Something) that drives the game. It taunts them, then begins to "infect" their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player. It even seemingly infects the phone itself, taking control of outside features at times in an attempt to impede the player's progress.
+After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player.
 
-The player will use clues about the friends from their profiles and posts to determine who has been "infected" by this Something and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
+The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
 
 ## Intended users
 
@@ -25,15 +25,12 @@ The player will use clues about the friends from their profiles and posts to det
     * messaging someone through the app's messenger
     * commenting on a post or profile
     * deleting someone from the friend's list
-    * "passing" their turn
-    * the Something can make an extra turn every x minutes the player spends in the same turn, based on difficulty (0 for lowest, increasing as difficulty increases)
-5. Once the free turns have passed, the player is confronted by the Something, who takes their first turn, and play begins. The Something's turn consists of performing one or more of the following actions, depending on difficulty:
+    * the illness can make an extra turn every x minutes the player spends in the same turn, based on difficulty (0 for lowest, increasing as difficulty increases)
+5. Once the free turns have passed, the "illness" takes its first turn, and play begins. The illness's turn consists of performing one or more of the following actions, depending on difficulty:
     * adding a number of infections to friends on the player's friends list
         * as infection stages increase, this can cause infections to chain to multiple friends with a single "move"
-    * sending messages or making posts in the app on the player's behalf
-    * using the Android device services to interfere with the player's progress or alter the game in some way, such as taking pictures with the camera to create posts as the player
-    * using outside services to do the same, such as accessing Google Maps to determine the player's location
-6. The player and the Something trade turns until the game ends. Any action taken against the Something does not end a turn, even if it is on the above list, but it can be used by the Something to create further obstacles for the player later on.
+    * sending messages or making posts in the app on the behalf of NPCs
+6. The player and the illness trade turns until the game ends.
     * The player can end the game early by choosing to delete their account. This will kick them back to the "sign-up" page, where they can create a new account and start again.
     * **Nothing** created or stored by the game using the device services is saved past the end of a game - it wipes all pictures taken immediately once the game ends. If the player wishes to save these for whatever reason, an option will be available in the game menu, but it is not done by default.
 
