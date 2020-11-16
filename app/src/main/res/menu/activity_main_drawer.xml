@@ -4,17 +4,27 @@
   tools:showIn="navigation_view">
 
   <group android:checkableBehavior="single">
+
     <item
-      android:id="@+id/nav_home"
-      android:icon="@drawable/ic_menu_camera"
-      android:title="@string/menu_home"/>
+      android:id="@+id/nav_feed"
+      android:title="@string/menu_feed"/>
+
     <item
-      android:id="@+id/nav_gallery"
-      android:icon="@drawable/ic_menu_gallery"
-      android:title="@string/menu_gallery"/>
+      android:id="@+id/nav_friends_list"
+      android:title="@string/menu_friends_list"/>
+
     <item
-      android:id="@+id/nav_slideshow"
-      android:icon="@drawable/ic_menu_slideshow"
-      android:title="@string/menu_slideshow"/>
+      android:id="@+id/nav_messages"
+      android:title="@string/menu_messages"/>
+
+    <item
+      android:id="@+id/nav_map"
+      android:title="@string/menu_map"/>
+
   </group>
+
+  <item
+    android:id="@+id/nav_delete"
+    android:title="@string/menu_delete"/>
+
 </menu>

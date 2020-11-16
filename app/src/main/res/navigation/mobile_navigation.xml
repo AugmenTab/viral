@@ -3,23 +3,30 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/mobile_navigation"
-  app:startDestination="@+id/nav_home">
+  app:startDestination="@+id/nav_feed">
 
   <fragment
-    android:id="@+id/nav_home"
-    android:label="@string/menu_home"
-    android:name="edu.cnm.deepdive.viral.controller.ui.home.HomeFragment"
-    tools:layout="@layout/fragment_home"/>
+    android:id="@+id/nav_feed"
+    android:label="@string/menu_feed"
+    android:name="edu.cnm.deepdive.viral.controller.ui.feed.FeedFragment"
+    tools:layout="@layout/fragment_feed"/>
 
   <fragment
-    android:id="@+id/nav_gallery"
-    android:label="@string/menu_gallery"
-    android:name="edu.cnm.deepdive.viral.controller.ui.gallery.GalleryFragment"
-    tools:layout="@layout/fragment_gallery"/>
+    android:id="@+id/nav_friends_list"
+    android:label="@string/menu_friends_list"
+    android:name="edu.cnm.deepdive.viral.controller.ui.friendsList.FriendsListFragment"
+    tools:layout="@layout/fragment_friends_list"/>
 
   <fragment
-    android:id="@+id/nav_slideshow"
-    android:label="@string/menu_slideshow"
-    android:name="edu.cnm.deepdive.viral.controller.ui.slideshow.SlideshowFragment"
-    tools:layout="@layout/fragment_slideshow"/>
+    android:id="@+id/nav_messages"
+    android:label="@string/menu_messages"
+    android:name="edu.cnm.deepdive.viral.controller.ui.messages.MessagesFragment"
+    tools:layout="@layout/fragment_messages"/>
+
+  <fragment
+    android:id="@+id/nav_map"
+    android:label="@string/menu_map"
+    android:name="edu.cnm.deepdive.viral.controller.ui.messages.MessagesFragment"
+    tools:layout="@layout/fragment_map"/>
+
 </navigation>
