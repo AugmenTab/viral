@@ -2,7 +2,7 @@
 
 [ddl.sql](sql/ddl.sql)
 
-```
+```SQL
 CREATE TABLE IF NOT EXISTS `Game`
 (
     `game_id`      INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
