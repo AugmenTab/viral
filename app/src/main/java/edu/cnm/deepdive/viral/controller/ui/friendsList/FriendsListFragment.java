@@ -8,26 +8,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import edu.cnm.deepdive.viral.R;
+import edu.cnm.deepdive.viral.databinding.FragmentFriendsListBinding;
 
 public class FriendsListFragment extends Fragment {
 
-  private FriendsListViewModel friendsListViewModel;
+  private FragmentFriendsListBinding binding;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
-    friendsListViewModel =
-        ViewModelProviders.of(this).get(FriendsListViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_friends_list, container, false);
-    final TextView textView = root.findViewById(R.id.text_gallery);
-    friendsListViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-      @Override
-      public void onChanged(@Nullable String s) {
-        textView.setText(s);
-      }
-    });
-    return root;
+    binding = FragmentFriendsListBinding.inflate(getLayoutInflater());
+    return binding.getRoot();
   }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    setupViewModel();
+  }
+
+  private void setupViewModel() {
+    FragmentActivity activity = getActivity();
+  }
+
 }
