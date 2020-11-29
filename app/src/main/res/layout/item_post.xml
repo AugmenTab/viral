@@ -55,15 +55,6 @@
       app:layout_constraintBottom_toTopOf="@id/button_message"/>
 
     <Button
-      android:id="@+id/button_comment"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/half_static_spacing"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/post_vertical_guideline"
-      app:layout_constraintTop_toBottomOf="@id/post_contents"/>
-
-    <Button
       android:id="@+id/button_message"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
