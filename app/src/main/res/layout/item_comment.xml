@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/half_margin"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <ImageView
     android:id="@+id/comment_profile_picture"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -19,13 +22,24 @@
     android:orientation="vertical"/>
 
   <TextView
-    android:id="@+id/comment_contents"
+    android:id="@+id/comment_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintStart_toEndOf="@id/comment_vertical_guideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:text="Friend Name"/>
 
+  <TextView
+    android:id="@+id/comment_contents"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_margin"
+    app:layout_constraintStart_toEndOf="@id/comment_vertical_guideline"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/comment_name"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:text="Lorem ipsum..."/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
