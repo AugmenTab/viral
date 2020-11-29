@@ -21,8 +21,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/messages_vertical_guideline"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintHorizontal_weight="5"/>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/messages_container"
@@ -31,8 +30,7 @@
     app:layout_constraintStart_toEndOf="@id/messages_vertical_guideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintHorizontal_weight="5"/>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <LinearLayout
     android:id="@+id/messages_button_container"

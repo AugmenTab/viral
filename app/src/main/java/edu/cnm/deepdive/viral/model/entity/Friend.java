@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey;
     ),
     indices = {
         @Index(value = {"name"}, unique = true),
-        @Index(value = {"address"}, unique = true),
+//        @Index(value = {"address"}, unique = true),
         @Index(value = {"profile_picture"}, unique = true),
         @Index(value = {"demeanor_id"})
     }
@@ -99,6 +99,12 @@ public class Friend {
 
   public void setProfilePicture(String profilePicture) {
     this.profilePicture = profilePicture;
+  }
+
+  @NonNull
+  @Override
+  public String toString() {
+    return name;
   }
 
 }
