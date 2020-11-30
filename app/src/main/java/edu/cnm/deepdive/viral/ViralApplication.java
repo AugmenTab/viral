@@ -15,10 +15,6 @@ public class ViralApplication extends Application {
     Stetho.initializeWithDefaults(this);
     ViralDatabase.setContext(this);
     ViralDatabase.getInstance().getFriendDao().delete().subscribeOn(Schedulers.io()).subscribe();
-    LiveData<Game> currentGame = ViralDatabase.getInstance().getGameDao().selectCurrentGame();
-    if (currentGame != null) {
-//      startActivity(new Intent());
-    }
   }
 
 }

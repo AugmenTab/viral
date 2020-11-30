@@ -16,4 +16,6 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="send_message_button">Send Message</string>
 
+  <string name="no_username_message">Please enter a username.</string>
+
 </resources>
