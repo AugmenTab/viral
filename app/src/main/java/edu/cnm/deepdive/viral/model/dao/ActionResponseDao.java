@@ -18,8 +18,7 @@ public interface ActionResponseDao {
       "SELECT * "
       + "FROM ActionResponse AS ar "
       + "INNER JOIN `Action` AS ac ON ar.response_to_id = ac.action_id "
-      + "WHERE ac.action_id = :action AND ac.demeanor_id = :demeanor "
-      + "ORDER BY appearance_chance ASC";
+      + "WHERE ac.action_id = :action AND ac.demeanor_id = :demeanor";
 
   @Insert
   Single<Long> insert(ActionResponse actionResponse);

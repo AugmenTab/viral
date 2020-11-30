@@ -19,8 +19,7 @@ public interface ActionDao {
   String SELECT_ACTION_BY_VISIBILITY_QUERY =
       "SELECT * "
           + "FROM `Action` "
-          + "WHERE public = :isPublic AND demeanor_id = :demeanor "
-          + "ORDER BY appearance_chance DESC";
+          + "WHERE public = :isPublic AND demeanor_id = :demeanor";
 
   @Insert
   Single<Long> insert(Action action);

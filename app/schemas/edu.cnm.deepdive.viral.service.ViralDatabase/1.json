@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "74e5c8a7d3afa0d705747943861c82be",
+    "identityHash": "7e58f780799322981dc795a3d1fec342",
     "entities": [
       {
         "tableName": "Game",
@@ -160,7 +160,7 @@
       },
       {
         "tableName": "Demeanor",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`demeanor_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `starting_chance` INTEGER NOT NULL, `infection_min` INTEGER NOT NULL, `infection_max` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`demeanor_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `infection_min` INTEGER NOT NULL, `infection_max` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -172,12 +172,6 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "startingChance",
-            "columnName": "starting_chance",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -213,7 +207,7 @@
       },
       {
         "tableName": "Action",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `public` INTEGER NOT NULL, `demeanor_id` INTEGER NOT NULL, `appearance_chance` INTEGER NOT NULL, FOREIGN KEY(`demeanor_id`) REFERENCES `Demeanor`(`demeanor_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `public` INTEGER NOT NULL, `demeanor_id` INTEGER NOT NULL, FOREIGN KEY(`demeanor_id`) REFERENCES `Demeanor`(`demeanor_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -236,12 +230,6 @@
           {
             "fieldPath": "demeanor",
             "columnName": "demeanor_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "appearanceChance",
-            "columnName": "appearance_chance",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -278,7 +266,7 @@
       },
       {
         "tableName": "ActionResponse",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_response_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `response_to_id` INTEGER NOT NULL, `response_id` INTEGER NOT NULL, `appearance_chance` INTEGER NOT NULL, FOREIGN KEY(`response_to_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_response_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `response_to_id` INTEGER NOT NULL, `response_id` INTEGER NOT NULL, FOREIGN KEY(`response_to_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -295,12 +283,6 @@
           {
             "fieldPath": "response",
             "columnName": "response_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "appearanceChance",
-            "columnName": "appearance_chance",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -356,7 +338,7 @@
       },
       {
         "tableName": "ActionTaken",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_taken_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `friend_id` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `action_id` INTEGER NOT NULL, `response_to_id` INTEGER, `content` TEXT NOT NULL, FOREIGN KEY(`action_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_to_id`) REFERENCES `ActionResponse`(`response_to_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`friend_id`) REFERENCES `Friend`(`friend_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_taken_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `friend_id` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `action_id` INTEGER NOT NULL, `response_to_id` INTEGER, FOREIGN KEY(`action_id`) REFERENCES `Action`(`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`response_to_id`) REFERENCES `ActionResponse`(`response_to_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`friend_id`) REFERENCES `Friend`(`friend_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -387,12 +369,6 @@
             "columnName": "response_to_id",
             "affinity": "INTEGER",
             "notNull": false
-          },
-          {
-            "fieldPath": "content",
-            "columnName": "content",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -467,7 +443,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '74e5c8a7d3afa0d705747943861c82be')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7e58f780799322981dc795a3d1fec342')"
     ]
   }
 }

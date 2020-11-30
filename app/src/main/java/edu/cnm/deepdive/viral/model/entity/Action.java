@@ -31,9 +31,6 @@ public class Action {
   @ColumnInfo(name = "demeanor_id")
   private long demeanor;
 
-  @ColumnInfo(name = "appearance_chance")
-  private int appearanceChance;
-
   public long getId() {
     return id;
   }
@@ -64,14 +61,6 @@ public class Action {
 
   public void setDemeanor(long demeanor) {
     this.demeanor = demeanor;
-  }
-
-  public int getAppearanceChance() {
-    return appearanceChance;
-  }
-
-  public void setAppearanceChance(int appearanceChance) {
-    this.appearanceChance = appearanceChance;
   }
 
 }

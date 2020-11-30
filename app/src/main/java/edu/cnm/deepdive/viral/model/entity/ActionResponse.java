@@ -39,9 +39,6 @@ public class ActionResponse {
   @ColumnInfo(name = "response_id")
   private long response;
 
-  @ColumnInfo(name = "appearance_chance")
-  private int appearanceChance;
-
   public long getId() {
     return id;
   }
@@ -65,14 +62,6 @@ public class ActionResponse {
 
   public void setResponse(long response) {
     this.response = response;
-  }
-
-  public int getAppearanceChance() {
-    return appearanceChance;
-  }
-
-  public void setAppearanceChance(int appearanceChance) {
-    this.appearanceChance = appearanceChance;
   }
 
 }

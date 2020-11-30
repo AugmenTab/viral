@@ -17,9 +17,6 @@ public class Demeanor {
   @NonNull
   private String name;
 
-  @ColumnInfo(name = "starting_chance")
-  private int startingChance;
-
   @ColumnInfo(name = "infection_min")
   private int infectionMin;
 
@@ -40,14 +37,6 @@ public class Demeanor {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public int getStartingChance() {
-    return startingChance;
-  }
-
-  public void setStartingChance(int startingChance) {
-    this.startingChance = startingChance;
   }
 
   public int getInfectionMin() {
