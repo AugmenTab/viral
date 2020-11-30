@@ -44,6 +44,9 @@ public interface FriendDao {
   @Query("SELECT * FROM Friend WHERE friend_id = :id")
   LiveData<Friend> selectSpecificFriend(long id);
 
+  @Query("SELECT * FROM Friend")
+  LiveData<List<Friend>> selectAll();
+
   @Query("SELECT * FROM Friend WHERE active = :active ORDER BY infection_level ASC")
   LiveData<List<Friend>> selectAllRemaining(boolean active);
 

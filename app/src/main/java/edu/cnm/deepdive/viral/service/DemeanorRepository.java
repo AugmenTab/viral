@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.model.service;
+package edu.cnm.deepdive.viral.service;
 
 import android.content.Context;
 import androidx.lifecycle.LiveData;

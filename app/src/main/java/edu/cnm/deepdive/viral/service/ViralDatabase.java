@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.model.service;
+package edu.cnm.deepdive.viral.service;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,7 +20,7 @@ import edu.cnm.deepdive.viral.model.entity.ActionTaken;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.model.entity.Game;
-import edu.cnm.deepdive.viral.model.service.ViralDatabase.Converters;
+import edu.cnm.deepdive.viral.service.ViralDatabase.Converters;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Date;
 import java.util.LinkedList;

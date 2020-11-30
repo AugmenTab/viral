@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
 import edu.cnm.deepdive.viral.model.entity.Friend;
-import edu.cnm.deepdive.viral.model.service.FriendRepository;
+import edu.cnm.deepdive.viral.service.FriendRepository;
 import java.util.List;
 
 public class MessagesViewModel extends AndroidViewModel {
@@ -26,7 +26,7 @@ public class MessagesViewModel extends AndroidViewModel {
   }
 
   public LiveData<List<Friend>> getActive() {
-    return friendRepository.getAll();
+    return friendRepository.getAllRemaining();
   }
 
   public LiveData<List<ActionTaken>> getFriendMessages() {
