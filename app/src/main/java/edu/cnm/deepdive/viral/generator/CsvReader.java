@@ -9,9 +9,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public abstract class CsvReader {
 
-  private CsvReader() {
-
-  }
+  private CsvReader() {}
 
   public static List<CSVRecord> parseCSV(InputStream file) throws IOException {
     InputStreamReader r = new InputStreamReader(file);
