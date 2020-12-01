@@ -1,12 +1,12 @@
-## Summary
+## Summary TODO
 
-The goal of this personal Android project will be to develop a mobile game called Viral. It will be a single-player turn-based strategy game set inside a social media app. 
+Viral is a single-player turn-based strategy game set inside a social media app. After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" the friends on their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player. The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness, and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
 
-After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" the friends on their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player.
+[1 or more paragraphs summarizing your aims or motivations for selecting the given topic for your app. That is, why did you choose to develop this particular app, and why is this (at least potentially) a useful or interesting app?]
 
-The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness, and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
+[1 or more paragraphs summarizing the key functional elements of the app.]
 
-## Intended users
+## Intended Users
 
 * For people who enjoy games with turn-based strategy elements, resource management, and subtle horror themes.
 
@@ -34,17 +34,17 @@ The player will use clues about the friends from their profiles and posts to det
     * The player can end the game early by choosing to delete their account. This will kick them back to the "sign-up" page, where they can "create a new account" and start again.
     * **Nothing** created or stored by the game using the device services is saved past the end of a game - it wipes all pictures taken immediately once the game ends. If the player wishes to save these for whatever reason, an option will be available in the game menu, but it is not done by default.
 
-## Persistent data
+## Persistent Data
 
 The game will be data-driven, with all possible text displayed during the game listed in SQLite databases that will be stored on the device.
 
 * all names, comments, messages, social media posts, and other interaction text sorted by disposition of the NPC
-* all events, actions, and turn options for the game to make against the player, along with percent chance of each action being selected
+* all events, actions, and turn options for the game to make against the player
 * art assets like photographs for posts, the "social media" logo, and icons
 * all information created for a single playthrough
-    * a map of the actions taken, created files from outside and device services, pictures for friends list profile pictures
+    * a map of the actions taken, created files from device services, pictures for friends list profile pictures
 
-## Device/external services
+## Device/External Services
 
 **Device Services:**
 * This app will use the [Camera](https://developer.android.com/guide/topics/media/camera#:~:text=%20Camera%20API%20%201%20Saving%20media%20files.,fields%20that%20require%20permission.%20LENS_POSE_REFERENCE%20LENS_INFO_HYPERFOCAL_DISTANCE...%20More%20) to take a profile picture for the user at the start of each new game.
@@ -54,22 +54,35 @@ The game will be data-driven, with all possible text displayed during the game l
     * The app will take advantage of Leaflet's ability to place markers on a user-imported map image to track the location of infected players after they reach a critical infection point. This will be displayed as a pinned link on the user's feed, presented in the story as a list of addresses where police have responded to reports of unexplained aggressive behavior. This will be accomplished by storing points on the map as values in the database, then assigning a random fake address to the user at the start of a new game as their "current location" and to all members of their friends list. As friends become infected at the maximum infection level, their fake address will be plotted on the map. The user can then check that address against profiles to determine who is infected.
         * This app could still be usable without this external service. Instead of having a map, the player would have to rely on other clues to help them determine which of their friends have been infected - the map simply informs them of final-stage infection, which will not be the ideal time to delete them anyway.
 
-## Wireframe
+## Wireframe TODO
 
 * [Wireframe](wireframe.md)
 
-## Technical Design
+## Technical Design TODO
 
-* [Entity-Relationship Diagram](entity-relationship.md)
+* [Basic User Instructions](user-instructions.md)
+* [Build Instructions](build-instructions.md)
+* [Copyright and Licenses]()
 * [Data Model Implementation](data-model-implementation.md)
 * [DDL](ddl.md)
+* [Entity-Relationship Diagram](entity-relationship.md)
+* [Javadocs]()
+* [Technical Requirements and Dependencies](requirements.md) TODO
 
-## Stretch goals/possible enhancements 
+## Current State TODO
+
+In grading a prototype, understanding what it does and doesn’t (yet) do is important preparation for evaluating it in operation. Please provide the following in separate paragraphs & lists:
+
+* A description of the current state of completion/readiness of your app. This should include a “hit list” of deficiencies: any unimplemented/incomplete elements, and known bugs, that would have to be implemented or corrected for a usable prototype (i.e. one that could be given to a skilled user for testing and feedback), ordered with the most urgent items first.
+
+* A list of aesthetic/cosmetic (not functional) enhancements that you think would improve your app. This list should be ordered, with those that would give the most improvement (in your opinion) listed first.
+
+* A list of functional stretch goals. These should be sorted either with those that would add the most utility at the top, or with those that would be the simplest to implement at the top.
+
+## Stretch Goals/Possible Enhancements 
 
 * I would like to connect the [Google AdMob](https://developers.google.com/admob) services to display ads as if they were social media posts.
 * I would like to connect the OpenAI GPT-3 API in order to generate realistic unique display text when required. Unfortunately, it is still in beta for the foreseeable future.
-* I would like to make use of more specialized text-to-speech services that can offer emotion and celebrity voices, like [CeleProc](https://www.cereproc.com/en/products/voices).
-* I would like to take control of the device's microphone or camera, in order to make recordings of ambient sound or video to play back to the player.
 * I would like to connect to an API that can generate realistic fake profile pictures, like the [Generated Photos API](https://generated.photos/api).
-* I would like to collect the names for the fake friends list by taking names from the user's contacts, to make it a more personalized experience.
+* I would like to collect the names and photos for the fake friends list by taking names and photos from the user's contacts, to make it a more personalized experience.
 * I would like to utilize the [Google Maps API](https://developers.google.com/maps/documentation/android-sdk/overview) or [LocationIQ](https://locationiq.com/geocoding) to make the user's "current location" their actual home address, and have the infected friends pop up around their actual location within a very narrow radius to their home, making it feel more personal and nearby.

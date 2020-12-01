@@ -6,10 +6,11 @@
 CREATE TABLE IF NOT EXISTS `Game`
 (
     `game_id`      INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `username`     TEXT                              NOT NULL,
     `start_time`   INTEGER                           NOT NULL,
     `end_time`     INTEGER,
-    `moves`        INTEGER,
-    `friends_left` INTEGER
+    `moves`        INTEGER                           NOT NULL,
+    `friends_left` INTEGER                           NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Game_start_time` ON `Game` (`start_time`);
@@ -30,30 +31,26 @@ CREATE TABLE IF NOT EXISTS `Friend`
 
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_name` ON `Friend` (`name`);
 
-CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_address` ON `Friend` (`address`);
-
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `Friend` (`profile_picture`);
 
 CREATE INDEX IF NOT EXISTS `index_Friend_demeanor_id` ON `Friend` (`demeanor_id`);
 
 CREATE TABLE IF NOT EXISTS `Demeanor`
 (
-    `demeanor_id`     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    `name`            TEXT                              NOT NULL,
-    `starting_chance` INTEGER                           NOT NULL,
-    `infection_min`   INTEGER                           NOT NULL,
-    `infection_max`   INTEGER                           NOT NULL
+    `demeanor_id`   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `name`          TEXT                              NOT NULL,
+    `infection_min` INTEGER                           NOT NULL,
+    `infection_max` INTEGER                           NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Demeanor_name` ON `Demeanor` (`name`);
 
 CREATE TABLE IF NOT EXISTS `Action`
 (
-    `action_id`         INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    `content`           TEXT                              NOT NULL,
-    `public`            INTEGER                           NOT NULL,
-    `demeanor_id`       INTEGER                           NOT NULL,
-    `appearance_chance` INTEGER                           NOT NULL,
+    `action_id`   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `content`     TEXT                              NOT NULL,
+    `public`      INTEGER                           NOT NULL,
+    `demeanor_id` INTEGER                           NOT NULL,
     FOREIGN KEY (`demeanor_id`) REFERENCES `Demeanor` (`demeanor_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
@@ -64,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `ActionResponse`
     `action_response_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     `response_to_id`     INTEGER                           NOT NULL,
     `response_id`        INTEGER                           NOT NULL,
-    `appearance_chance`  INTEGER                           NOT NULL,
     FOREIGN KEY (`response_to_id`) REFERENCES `Action` (`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
     FOREIGN KEY (`response_id`) REFERENCES `Action` (`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
@@ -80,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `ActionTaken`
     `timestamp`       INTEGER                           NOT NULL,
     `action_id`       INTEGER                           NOT NULL,
     `response_to_id`  INTEGER,
-    `content`         TEXT                              NOT NULL,
     FOREIGN KEY (`action_id`) REFERENCES `Action` (`action_id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
     FOREIGN KEY (`response_to_id`) REFERENCES `ActionResponse` (`response_to_id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
     FOREIGN KEY (`friend_id`) REFERENCES `Friend` (`friend_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
