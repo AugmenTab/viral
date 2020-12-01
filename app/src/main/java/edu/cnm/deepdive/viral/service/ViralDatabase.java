@@ -25,6 +25,7 @@ import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.service.ViralDatabase.Converters;
 import io.reactivex.Single;
+import io.reactivex.annotations.SchedulerSupport;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileReader;
@@ -95,6 +96,7 @@ public abstract class ViralDatabase extends RoomDatabase {
       super.onCreate(db);
       try {
         importDemeanors();
+        importActions();
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -131,6 +133,22 @@ public abstract class ViralDatabase extends RoomDatabase {
         demeanors.add(demeanor);
       }
       demeanorDao.insert(demeanors).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    private void importActions() throws IOException {
+      DemeanorDao demeanorDao = ViralDatabase.getInstance().getDemeanorDao();
+      ActionDao actionDao = ViralDatabase.getInstance().getActionDao();
+      List<Action> actions = new ArrayList<>();
+      List<CSVRecord> list =
+          CsvReader.parseCSV(context.getResources().openRawResource(R.raw.actions));
+      for (CSVRecord item : list) {
+        Action action = new Action();
+        action.setContent(item.get(0));
+        action.setPublic(Boolean.parseBoolean(item.get(1)));
+        action.setDemeanor(demeanorDao.selectDemeanorByName(item.get(2)).getValue().getId()); // TODO: Get help from Nick/Todd on why this is coming up null.
+        actions.add(action);
+      }
+      actionDao.insert(actions).subscribeOn(Schedulers.io()).subscribe();
     }
 
   }
