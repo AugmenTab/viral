@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textfield.TextInputLayout.OnEditTextAttachedListener;
 import edu.cnm.deepdive.viral.R;
@@ -30,13 +31,14 @@ public class NewGameActivity extends AppCompatActivity {
 //    }
     binding = ActivityNewGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
+    NewGameViewModel viewModel = new ViewModelProvider(this).get(NewGameViewModel.class);
     binding.newGameButton.setOnClickListener((v) -> {
       String username = binding.accountNameInput.getText().toString().trim();
       if (username.isEmpty()) {
         Toast.makeText(
             NewGameActivity.this, R.string.no_username_message, Toast.LENGTH_SHORT).show();
       } else {
-        // NewGameViewModel viewModel = new NewGameViewModel(/* TODO: HELP */, username, 0);
+        viewModel.newGame(username, 0);
         switchActivity();
       }
     });

@@ -21,15 +21,14 @@ public class NewGameViewModel extends AndroidViewModel {
   private final GameDao gameDao;
   private final FriendDao friendDao;
 
-  public NewGameViewModel(@NonNull Application application, String username, int n) {
+  public NewGameViewModel(@NonNull Application application) {
     super(application);
     gameDao = ViralDatabase.getInstance().getGameDao();
     friendDao = ViralDatabase.getInstance().getFriendDao();
-    newGame(username, n);
   }
 
   public void newGame(String username, int n) {
-     createGameInDatabase(username);
+     createGameInDatabase(username, n);
     // TODO: Generate friends
     try {
       createFriendsListInDatabase(n);
@@ -37,13 +36,15 @@ public class NewGameViewModel extends AndroidViewModel {
       e.printStackTrace();
     }
     // TODO: Create initial posts by friends
+    // TODO: Delete "user" file, if one exists.
+    // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
   }
 
-  private void createGameInDatabase(String username) {
+  private void createGameInDatabase(String username, int n) {
     Game game = new Game();
     game.setUsername(username);
     game.setStartTime(new Date());
-    game.setFriendsLeft(STARTING_FRIENDS_COUNT_DEFAULT);
+    game.setFriendsLeft(n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT);
     gameDao.insert(game).subscribeOn(Schedulers.io()).subscribe();
   }
 

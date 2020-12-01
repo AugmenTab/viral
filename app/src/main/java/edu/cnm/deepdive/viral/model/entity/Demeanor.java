@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.viral.model.entity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -53,6 +54,25 @@ public class Demeanor {
 
   public void setInfectionMax(int infectionMax) {
     this.infectionMax = infectionMax;
+  }
+
+  @Override
+  public int hashCode() {
+    return (int) (id * 37 + name.hashCode()); // Objects.hashCode(id, name); is equivalent
+  }
+
+  @Override
+  public boolean equals(@Nullable Object obj) {
+    boolean comparison;
+    if (this == obj) {
+      comparison = true;
+    } else if (obj instanceof Demeanor) {
+      Demeanor other = (Demeanor) obj;
+      comparison = this.id == other.id && (this.id == 0 || name.equals(other.name)); // TODO Remove "this" on this line only
+    } else {
+      comparison = false;
+    }
+    return comparison;
   }
 
 }

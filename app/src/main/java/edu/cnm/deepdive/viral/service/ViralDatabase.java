@@ -25,9 +25,20 @@ import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.service.ViralDatabase.Converters;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 @Database(
@@ -84,64 +95,79 @@ public abstract class ViralDatabase extends RoomDatabase {
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
       try {
-        importDemeanors();
-        importActions();
+        Map<Demeanor, List<Action>> demeanors = importDemeanors();
+        importActions(demeanors);
+        persistDemeanorsAndActions(demeanors);
 //        importActionResponses();
       } catch (IOException e) {
         e.printStackTrace();
       }
-      /* FriendDao friendDao = ViralDatabase.getInstance().getFriendDao();
-      Demeanor demeanor = new Demeanor();
-      demeanor.setName("aggressive");
-      demeanorDao.insert(demeanor)
-          .flatMap((id) -> {
-            List<Friend> friends = new LinkedList<>();
-            for (String name : new String[] {"Bob", "Alice", "Tim"}) {
-              Friend friend = new Friend();
-              friend.setName(name);
-              friend.setDemeanor(id);
-              friend.setProfilePicture(name);
-              friends.add(friend);
-            }
-            return friendDao.insert(friends);
-          })
-          .subscribeOn(Schedulers.io())
-          .subscribe(); */
     }
 
-    private void importDemeanors() throws IOException {
-      DemeanorDao demeanorDao = ViralDatabase.getInstance().getDemeanorDao();
-      List<Demeanor> demeanors = new ArrayList<>();
-      List<CSVRecord> list =
-          CsvReader.parseCSV(context.getResources().openRawResource(R.raw.demeanors));
-      for (CSVRecord item : list) {
-        Demeanor demeanor = new Demeanor();
-        demeanor.setName(item.get(0).trim());
-        demeanor.setInfectionMin(Integer.parseInt(item.get(1).trim()));
-        demeanor.setInfectionMax(Integer.parseInt(item.get(2).trim()));
-        demeanors.add(demeanor);
+    private Map<Demeanor, List<Action>> importDemeanors() throws IOException {
+      try (
+          InputStream input = context.getResources().openRawResource(R.raw.demeanors);
+          Reader reader = new InputStreamReader(input);
+          CSVParser parser = CSVParser.parse(
+              reader,
+              CSVFormat.DEFAULT
+                  .withFirstRecordAsHeader().withIgnoreEmptyLines().withIgnoreSurroundingSpaces());
+      ) {
+        Map<Demeanor, List<Action>> demeanors = new LinkedHashMap<>();
+        for (CSVRecord item : parser) {
+          Demeanor demeanor = new Demeanor();
+          demeanor.setName(item.get(0));
+          demeanor.setInfectionMin(Integer.parseInt(item.get(1)));
+          demeanor.setInfectionMax(Integer.parseInt(item.get(2)));
+          demeanors.put(demeanor, new LinkedList<>());
+        }
+        return demeanors;
       }
-      demeanorDao.insert(demeanors).subscribeOn(Schedulers.io()).subscribe(
-          (value) -> {},
-          (throwable) -> {throw new RuntimeException(throwable);}
-      );
     }
 
-    private void importActions() throws IOException {
+    private void importActions(Map<Demeanor, List<Action>> demeanors) throws IOException {
+      try (
+          InputStream input = context.getResources().openRawResource(R.raw.actions);
+          Reader reader = new InputStreamReader(input);
+          CSVParser parser = CSVParser.parse(
+              reader,
+              CSVFormat.DEFAULT
+                  .withFirstRecordAsHeader().withIgnoreEmptyLines().withIgnoreSurroundingSpaces());
+      ) {
+        for (CSVRecord item : parser) {
+          Action action = new Action();
+          action.setContent(item.get(0));
+          action.setPublic(Boolean.parseBoolean(item.get(1)));
+          Demeanor demeanor = new Demeanor();
+          demeanor.setName(item.get(2));
+          demeanors.get(demeanor).add(action);
+        }
+      }
+    }
+
+    private void persistDemeanorsAndActions(Map<Demeanor, List<Action>> demeanors) {
       DemeanorDao demeanorDao = ViralDatabase.getInstance().getDemeanorDao();
       ActionDao actionDao = ViralDatabase.getInstance().getActionDao();
-      List<Action> actions = new ArrayList<>();
-      List<CSVRecord> list =
-          CsvReader.parseCSV(context.getResources().openRawResource(R.raw.actions));
-      for (CSVRecord item : list) {
-        Action action = new Action();
-        action.setContent(item.get(0).trim());
-        action.setPublic(Boolean.parseBoolean(item.get(1).trim()));
-//        action.setDemeanor(demeanorDao.selectDemeanorByName(item.get(2).trim()).getValue().getId()); // TODO: Get help from Nick/Todd on why this is coming up null.
-        action.setDemeanor(1);
-        actions.add(action);
-      }
-      actionDao.insert(actions).subscribeOn(Schedulers.io()).subscribe();
+      Set<Demeanor> keys = demeanors.keySet();
+      demeanorDao.insert(keys)
+          .flatMap((ids) -> {
+            Iterator<Demeanor> iterDemeanor = keys.iterator();
+            Iterator<Long> iterId = ids.iterator();
+            List<Action> allActions = new LinkedList<>();
+            while (iterId.hasNext()) {
+              long id = iterId.next();
+              Demeanor demeanor = iterDemeanor.next();
+              List<Action> actions = demeanors.get(demeanor);
+              actions.forEach((action) -> action.setDemeanor(id));
+              allActions.addAll(actions);
+            }
+            return actionDao.insert(allActions);
+          })
+          .subscribeOn(Schedulers.io())
+          .subscribe(
+              (ids) -> {},
+              (throwable) -> {throw new RuntimeException(throwable);}
+          );
     }
 
     private void importActionResponses() throws IOException {
