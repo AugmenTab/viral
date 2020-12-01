@@ -49,7 +49,7 @@ public class NewGameViewModel extends AndroidViewModel {
 
   private void createFriendsListInDatabase(int n) throws IOException {
     FriendGenerator generator = new FriendGenerator(this.getApplication());
-    List<Friend> friends = generator.makeFriends(n > 0 ? n :STARTING_FRIENDS_COUNT_DEFAULT);
+    List<Friend> friends = generator.makeFriends(n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT);
     friendDao.insert(friends).subscribeOn(Schedulers.io()).subscribe();
   }
 
