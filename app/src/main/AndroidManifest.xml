@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="edu.cnm.deepdive.viral">
 
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.CAMERA"/>
+
   <application
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
@@ -23,7 +26,5 @@
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
   </application>
-
-  <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
