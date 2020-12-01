@@ -40,6 +40,9 @@ public interface DemeanorDao {
   @Query("SELECT * FROM Demeanor WHERE demeanor_id = :id")
   LiveData<Demeanor> selectSpecificDemeanor(long id);
 
+  @Query("SELECT * FROM Demeanor WHERE name = :name")
+  LiveData<Demeanor> selectDemeanorByName(String name);
+
   @Query(SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY)
   LiveData<List<Demeanor>> selectDemeanorsByInfectionLevel(int min, int max);
 
