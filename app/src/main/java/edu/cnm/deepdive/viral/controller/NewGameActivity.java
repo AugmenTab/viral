@@ -19,7 +19,6 @@ import edu.cnm.deepdive.viral.viewmodel.NewGameViewModel;
 
 public class NewGameActivity extends AppCompatActivity {
 
-  private NewGameViewModel viewModel;
   private ActivityNewGameBinding binding;
 
   @Override
@@ -37,7 +36,7 @@ public class NewGameActivity extends AppCompatActivity {
         Toast.makeText(
             NewGameActivity.this, R.string.no_username_message, Toast.LENGTH_SHORT).show();
       } else {
-        // viewModel = new NewGameViewModel(/* TODO: HELP */, username);
+        // NewGameViewModel viewModel = new NewGameViewModel(/* TODO: HELP */, username, 0);
         switchActivity();
       }
     });

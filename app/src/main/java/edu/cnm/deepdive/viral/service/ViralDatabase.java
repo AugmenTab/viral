@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.viral.service;
 
 import android.app.Application;
-import android.content.res.AssetManager;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -24,21 +23,11 @@ import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.service.ViralDatabase.Converters;
-import io.reactivex.Single;
-import io.reactivex.annotations.SchedulerSupport;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 @Database(
@@ -97,10 +86,10 @@ public abstract class ViralDatabase extends RoomDatabase {
       try {
         importDemeanors();
         importActions();
+//        importActionResponses();
       } catch (IOException e) {
         e.printStackTrace();
       }
-
       /* FriendDao friendDao = ViralDatabase.getInstance().getFriendDao();
       Demeanor demeanor = new Demeanor();
       demeanor.setName("aggressive");
@@ -127,12 +116,15 @@ public abstract class ViralDatabase extends RoomDatabase {
           CsvReader.parseCSV(context.getResources().openRawResource(R.raw.demeanors));
       for (CSVRecord item : list) {
         Demeanor demeanor = new Demeanor();
-        demeanor.setName(item.get(0));
-        demeanor.setInfectionMin(Integer.parseInt(item.get(1)));
-        demeanor.setInfectionMax(Integer.parseInt(item.get(2)));
+        demeanor.setName(item.get(0).trim());
+        demeanor.setInfectionMin(Integer.parseInt(item.get(1).trim()));
+        demeanor.setInfectionMax(Integer.parseInt(item.get(2).trim()));
         demeanors.add(demeanor);
       }
-      demeanorDao.insert(demeanors).subscribeOn(Schedulers.io()).subscribe();
+      demeanorDao.insert(demeanors).subscribeOn(Schedulers.io()).subscribe(
+          (value) -> {},
+          (throwable) -> {throw new RuntimeException(throwable);}
+      );
     }
 
     private void importActions() throws IOException {
@@ -143,12 +135,17 @@ public abstract class ViralDatabase extends RoomDatabase {
           CsvReader.parseCSV(context.getResources().openRawResource(R.raw.actions));
       for (CSVRecord item : list) {
         Action action = new Action();
-        action.setContent(item.get(0));
-        action.setPublic(Boolean.parseBoolean(item.get(1)));
-        action.setDemeanor(demeanorDao.selectDemeanorByName(item.get(2)).getValue().getId()); // TODO: Get help from Nick/Todd on why this is coming up null.
+        action.setContent(item.get(0).trim());
+        action.setPublic(Boolean.parseBoolean(item.get(1).trim()));
+//        action.setDemeanor(demeanorDao.selectDemeanorByName(item.get(2).trim()).getValue().getId()); // TODO: Get help from Nick/Todd on why this is coming up null.
+        action.setDemeanor(1);
         actions.add(action);
       }
       actionDao.insert(actions).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    private void importActionResponses() throws IOException {
+      // TODO: Create method to insert ActionResponses.
     }
 
   }

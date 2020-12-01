@@ -3,25 +3,19 @@ package edu.cnm.deepdive.viral.generator;
 import android.app.Application;
 import android.content.res.AssetManager;
 import androidx.lifecycle.LiveData;
-import edu.cnm.deepdive.viral.R;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.service.ViralDatabase;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 public class FriendGenerator {
 
   private final Random rng;
+  private final AssetManager am;
   private final List<CSVRecord> femaleNames;
   private final List<CSVRecord> maleNames;
   private final List<CSVRecord> surnames;
@@ -29,12 +23,11 @@ public class FriendGenerator {
 
   public FriendGenerator(Application application) throws IOException {
     rng = new Random();
-    AssetManager am = application.getAssets();
+    am = application.getAssets();
     femaleNames = CsvReader.parseCSV(am.open("friends/female.csv"));
     maleNames = CsvReader.parseCSV(am.open("friends/male.csv"));
     surnames = CsvReader.parseCSV(am.open("friends/surnames.csv"));
     demeanors = ViralDatabase.getInstance().getDemeanorDao().selectDemeanorsByInfectionLevel(0, 2);
-
   }
 
   public List<Friend> makeFriends(int n) {
