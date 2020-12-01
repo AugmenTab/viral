@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7e58f780799322981dc795a3d1fec342",
+    "identityHash": "291de0925d8fe23d35c407cdfdaf8f84",
     "entities": [
       {
         "tableName": "Game",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start_time` INTEGER NOT NULL, `end_time` INTEGER, `moves` INTEGER, `friends_left` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `username` TEXT NOT NULL, `start_time` INTEGER NOT NULL, `end_time` INTEGER, `moves` INTEGER NOT NULL, `friends_left` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "game_id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -30,13 +36,13 @@
             "fieldPath": "moves",
             "columnName": "moves",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "friendsLeft",
             "columnName": "friends_left",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -443,7 +449,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7e58f780799322981dc795a3d1fec342')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '291de0925d8fe23d35c407cdfdaf8f84')"
     ]
   }
 }

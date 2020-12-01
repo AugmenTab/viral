@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.viral.service;
 
 import android.app.Application;
+import android.content.res.AssetManager;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -8,6 +9,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+import edu.cnm.deepdive.viral.R;
+import edu.cnm.deepdive.viral.generator.CsvReader;
 import edu.cnm.deepdive.viral.model.dao.ActionDao;
 import edu.cnm.deepdive.viral.model.dao.ActionResponseDao;
 import edu.cnm.deepdive.viral.model.dao.ActionTakenDao;
@@ -21,10 +24,21 @@ import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.service.ViralDatabase.Converters;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.collections4.IterableUtils;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 @Database(
     entities = {
@@ -79,8 +93,13 @@ public abstract class ViralDatabase extends RoomDatabase {
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
-      FriendDao friendDao = ViralDatabase.getInstance().getFriendDao();
-      DemeanorDao demeanorDao = ViralDatabase.getInstance().getDemeanorDao();
+      try {
+        importDemeanors();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      /* FriendDao friendDao = ViralDatabase.getInstance().getFriendDao();
       Demeanor demeanor = new Demeanor();
       demeanor.setName("aggressive");
       demeanorDao.insert(demeanor)
@@ -96,7 +115,22 @@ public abstract class ViralDatabase extends RoomDatabase {
             return friendDao.insert(friends);
           })
           .subscribeOn(Schedulers.io())
-          .subscribe();
+          .subscribe(); */
+    }
+
+    private void importDemeanors() throws IOException {
+      DemeanorDao demeanorDao = ViralDatabase.getInstance().getDemeanorDao();
+      List<Demeanor> demeanors = new ArrayList<>();
+      List<CSVRecord> list =
+          CsvReader.parseCSV(context.getResources().openRawResource(R.raw.demeanors));
+      for (CSVRecord item : list) {
+        Demeanor demeanor = new Demeanor();
+        demeanor.setName(item.get(0));
+        demeanor.setInfectionMin(Integer.parseInt(item.get(1)));
+        demeanor.setInfectionMax(Integer.parseInt(item.get(2)));
+        demeanors.add(demeanor);
+      }
+      demeanorDao.insert(demeanors).subscribeOn(Schedulers.io()).subscribe();
     }
 
   }
