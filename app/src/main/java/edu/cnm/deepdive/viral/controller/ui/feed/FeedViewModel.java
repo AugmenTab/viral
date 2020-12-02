@@ -1,19 +1,24 @@
 package edu.cnm.deepdive.viral.controller.ui.feed;
 
+import android.app.Application;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import edu.cnm.deepdive.viral.model.entity.ActionTaken;
+import edu.cnm.deepdive.viral.service.FriendRepository;
+import java.util.List;
 
-public class FeedViewModel extends ViewModel {
+public class FeedViewModel extends AndroidViewModel {
 
-  private MutableLiveData<String> mText;
+  private FriendRepository friendRepository;
 
-  public FeedViewModel() {
-    mText = new MutableLiveData<>();
-    mText.setValue("This is home fragment");
+  public FeedViewModel(@NonNull Application application) {
+    super(application);
+    friendRepository = new FriendRepository(application);
   }
 
-  public LiveData<String> getText() {
-    return mText;
+  public LiveData<List<ActionTaken>> getMessages(long id) {
+    return friendRepository.getPostsByFriend(id);
   }
+
 }

@@ -24,14 +24,13 @@ public class FriendsListFragment extends Fragment {
   private FragmentFriendsListBinding binding;
   private FriendsListViewModel friendsListViewModel;
 
-  public View onCreateView(@NonNull LayoutInflater inflater,
-      ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(
+      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentFriendsListBinding.inflate(getLayoutInflater());
     binding.friendsListContainer.setOnItemSelectedListener(new OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Friend friend = (Friend) parent.getItemAtPosition(position);
-
       }
 
       @Override

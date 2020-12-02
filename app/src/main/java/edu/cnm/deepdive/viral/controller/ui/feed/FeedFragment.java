@@ -11,23 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import edu.cnm.deepdive.viral.R;
+import edu.cnm.deepdive.viral.databinding.FragmentFeedBinding;
 
 public class FeedFragment extends Fragment {
 
+  private FragmentFeedBinding binding;
   private FeedViewModel feedViewModel;
 
-  public View onCreateView(@NonNull LayoutInflater inflater,
-      ViewGroup container, Bundle savedInstanceState) {
-    feedViewModel =
-        ViewModelProviders.of(this).get(FeedViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_feed, container, false);
-    final TextView textView = root.findViewById(R.id.text_home);
-    feedViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-      @Override
-      public void onChanged(@Nullable String s) {
-        textView.setText(s);
-      }
-    });
-    return root;
+  public View onCreateView(
+      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
+    binding = FragmentFeedBinding.inflate(inflater);
+    return binding.getRoot();
   }
+
 }

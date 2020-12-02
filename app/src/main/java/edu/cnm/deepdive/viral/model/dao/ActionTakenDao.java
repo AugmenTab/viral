@@ -18,14 +18,21 @@ public interface ActionTakenDao {
       "SELECT * "
       + "FROM ActionTaken AS at "
       + "INNER JOIN `Action` AS ac ON at.action_id = ac.action_id "
-      + "WHERE ac.public = 1 "
+      + "WHERE ac.public = true "
       + "ORDER BY timestamp DESC";
+
+  String FRIEND_POSTS_QUERY =
+      "SELECT * "
+          + "FROM ActionTaken AS at "
+          + "INNER JOIN `Action` AS ac ON at.action_id = ac.action_id "
+          + "WHERE ac.public = true AND friend_id = :friend "
+          + "ORDER BY timestamp DESC";
 
   String FRIEND_MESSAGES_QUERY =
       "SELECT * "
       + "FROM ActionTaken AS at "
       + "INNER JOIN `Action` AS ac ON at.action_id = ac.action_id "
-      + "WHERE ac.public = 0 AND friend_id = :friend "
+      + "WHERE ac.public = false AND friend_id = :friend "
       + "ORDER BY timestamp ASC";
 
   @Insert
@@ -60,6 +67,9 @@ public interface ActionTakenDao {
 
   @Query(FEED_ACTIONS_QUERY)
   LiveData<List<ActionTaken>> selectFeedActions();
+
+  @Query(FRIEND_POSTS_QUERY)
+  LiveData<List<ActionTaken>> selectPostsByFriend(long friend);
 
   @Query(FRIEND_MESSAGES_QUERY)
   LiveData<List<ActionTaken>> selectMessagesByFriend(long friend);

@@ -3,7 +3,6 @@ package edu.cnm.deepdive.viral.generator;
 import android.app.Application;
 import android.content.res.AssetManager;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.service.ViralDatabase;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import org.apache.commons.csv.CSVRecord;
 
 public class FriendGenerator {
