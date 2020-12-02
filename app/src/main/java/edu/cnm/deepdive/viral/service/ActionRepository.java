@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.viral.model.dao.ActionDao;
 import edu.cnm.deepdive.viral.model.entity.Action;
 import edu.cnm.deepdive.viral.model.entity.Friend;
+import io.reactivex.Single;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -28,14 +29,8 @@ public class ActionRepository {
     return actionDao.selectActionsByVisibility(true, id);
   }
 
-  public List<Action> getPostsSync(long id) throws InterruptedException, ExecutionException {
-    Callable<List<Action>> callable = new Callable<List<Action>>() {
-      @Override
-      public List<Action> call() throws Exception {
-        return actionDao.selectActionsByVisibilitySync(true, id);
-      }
-    };
-    return Executors.newSingleThreadExecutor().submit(callable).get();
+  public Single<List<Action>> getPostsSync(long demeanor) {
+    return actionDao.selectActionsByVisibilitySync(true, demeanor);
   }
 
   public LiveData<List<Action>> getMessages(long id) {

@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey;
     ),
     indices = {
         @Index(value = {"name"}, unique = true),
-//        @Index(value = {"address"}, unique = true),
+//        @Index(value = {"address"}),
         @Index(value = {"profile_picture"}),
         @Index(value = {"demeanor_id"})
     }

@@ -7,6 +7,7 @@ import edu.cnm.deepdive.viral.model.dao.DemeanorDao;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.pojo.DemeanorWithActions;
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -33,11 +34,8 @@ public class DemeanorRepository {
     return demeanorDao.selectDemeanorsByInfectionLevel(min, max);
   }
 
-  public List<Demeanor> getDemeanorsByInfectionLevelSync(int min, int max)
-      throws InterruptedException, ExecutionException {
-    Callable<List<Demeanor>> callable = () ->
-        demeanorDao.selectDemeanorsByInfectionLevelSync(min, max);
-    return Executors.newSingleThreadExecutor().submit(callable).get();
+  public Single<List<Demeanor>> getDemeanorsByInfectionLevelSync(int min, int max) {
+    return demeanorDao.selectDemeanorsByInfectionLevelSync(min, max);
   }
 
   public Demeanor getDemeanorByNameSync(String name)

@@ -51,7 +51,7 @@ public interface FriendDao {
   LiveData<List<Friend>> selectAllRemaining(boolean active);
 
   @Query("SELECT * FROM Friend WHERE active = :active ORDER BY infection_level ASC")
-  List<Friend> selectAllRemainingSync(boolean active);
+  Single<List<Friend>> selectAllRemainingSync(boolean active);
 
   @Query("SELECT * FROM Friend WHERE active = :active AND infection_level = 0 ORDER BY name")
   List<Friend> selectUninfectedFriendsSync(boolean active);

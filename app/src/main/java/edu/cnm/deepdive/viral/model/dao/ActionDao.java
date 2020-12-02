@@ -52,7 +52,7 @@ public interface ActionDao {
   LiveData<List<Action>> selectActionsByVisibility(boolean isPublic, long demeanor);
 
   @Query(SELECT_ACTION_BY_VISIBILITY_QUERY)
-  List<Action> selectActionsByVisibilitySync(boolean isPublic, long demeanor);
+  Single<List<Action>> selectActionsByVisibilitySync(boolean isPublic, long demeanor);
 
   @Transaction
   @Query("SELECT * FROM `Demeanor` WHERE demeanor_id = :id")

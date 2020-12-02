@@ -6,20 +6,24 @@ import edu.cnm.deepdive.viral.model.dao.GameDao;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.model.pojo.ScoreSummary;
 import io.reactivex.Completable;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class GameRepository {
 
   private final Context context;
   private final GameDao gameDao;
+  private final FriendRepository friendRepository;
 
   public GameRepository(Context context) {
     this.context = context;
     ViralDatabase database = ViralDatabase.getInstance();
     gameDao = database.getGameDao();
+    friendRepository = new FriendRepository(context);
   }
 
   public LiveData<Game> getSpecificGame(long id) {
@@ -54,12 +58,25 @@ public class GameRepository {
         : gameDao.delete(game).ignoreElement();
   }
 
-  public Disposable createGameInDatabase(String username, int n) {
-    Game game = new Game();
-    game.setUsername(username);
-    game.setStartTime(new Date());
-    game.setFriendsLeft(n);
-    return gameDao.insert(game).subscribeOn(Schedulers.io()).subscribe();
+  public Completable createGameInDatabase(Random rng, String username, int postsToMake, int startingFriends) {
+    return friendRepository.createFriendsListInDatabase(context, startingFriends)
+        .andThen(
+            Single.fromCallable(() -> {
+              Game game = new Game();
+              game.setUsername(username);
+              game.setStartTime(new Date());
+              game.setFriendsLeft(postsToMake);
+              return game;
+            })
+                .flatMap((game) -> gameDao.insert(game)
+                    .map((id) -> {
+                      game.setId(id);
+                      return game;
+                    })
+                )
+                .flatMapCompletable((game) -> friendRepository.createPost(rng, postsToMake))
+        )
+        .subscribeOn(Schedulers.io());
   }
 
 }

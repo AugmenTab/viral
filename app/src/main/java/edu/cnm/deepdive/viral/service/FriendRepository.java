@@ -11,8 +11,12 @@ import edu.cnm.deepdive.viral.model.entity.Action;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -39,9 +43,8 @@ public class FriendRepository {
     return friendDao.selectAll();
   }
 
-  public List<Friend> getAllRemainingSync() throws InterruptedException, ExecutionException {
-    Callable<List<Friend>> callable = () -> friendDao.selectAllRemainingSync(true);
-    return Executors.newSingleThreadExecutor().submit(callable).get();
+  public Single<List<Friend>> getAllRemainingSync() {
+    return friendDao.selectAllRemainingSync(true);
   }
 
   public List<Friend> getAllRemainingUninfectedSync()
@@ -63,23 +66,29 @@ public class FriendRepository {
     return actionTakenDao.selectMessagesByFriend(id);
   }
 
-  public void createFriendsListInDatabase(Application application, int n) throws IOException {
-    FriendGenerator generator = new FriendGenerator(application);
-    List<Friend> friends = generator.makeFriends(n);
-    friendDao.insert(friends).subscribeOn(Schedulers.io()).subscribe();
+  public Completable createFriendsListInDatabase(Context context, int startingFriends) {
+    return Single.fromCallable(() -> new FriendGenerator(context))
+        .flatMap((generator) -> demeanorRepository.getDemeanorsByInfectionLevelSync(0, 2)
+            .map((demeanors) -> generator.makeFriends(startingFriends, demeanors))
+        )
+        .flatMap(friendDao::insert)
+        .ignoreElement();
   }
 
-  public void createPost(Random rng) {
-    try {
-      List<Friend> friends = getAllRemainingSync();
-      Friend poster = friends.get(rng.nextInt(friends.size()));
-      List<Action> actions = actionRepository.getPostsSync(poster.getDemeanor());
-      ActionGenerator generator = new ActionGenerator();
-      ActionTaken post = generator.makePost(poster, actions);
-      actionTakenDao.insert(post).subscribeOn(Schedulers.io()).subscribe();
-    } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
-    }
+  public Completable createPost(Random rng, int num) {
+    ActionGenerator generator = new ActionGenerator();
+    return getAllRemainingSync()
+        .flatMapObservable((friends) -> {
+          List<Friend> selection = new LinkedList<>();
+          for (int i = 0; i < num; i++) {
+            selection.add(friends.get(rng.nextInt(friends.size())));
+          }
+          return Observable.fromIterable(selection);
+        })
+        .map((friend) -> actionRepository.getPostsSync(friend.getDemeanor())
+            .flatMap((actions) -> actionTakenDao.insert(generator.makePost(friend, actions)))
+        )
+        .ignoreElements();
   }
 
   public boolean spreadInfection(Random rng) {

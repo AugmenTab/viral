@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.viral.generator;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.AssetManager;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
@@ -23,29 +24,24 @@ public class FriendGenerator {
   private final List<CSVRecord> surnames;
   private final DemeanorRepository demeanorRepository;
 
-  public FriendGenerator(Application application) throws IOException {
+  public FriendGenerator(Context context) throws IOException {
     rng = new Random();
-    am = application.getAssets();
+    am = context.getAssets();
     femaleNames = CsvReader.parseCSV(am.open("friends/names/female.csv"));
     maleNames = CsvReader.parseCSV(am.open("friends/names/male.csv"));
     surnames = CsvReader.parseCSV(am.open("friends/names/surnames.csv"));
-    demeanorRepository = new DemeanorRepository(application);
+    demeanorRepository = new DemeanorRepository(context);
   }
 
-  public List<Friend> makeFriends(int n) {
+  public List<Friend> makeFriends(int n, List<Demeanor> demeanors) {
     List<Friend> friends = new LinkedList<>();
-    try {
-      List<Demeanor> demeanors = demeanorRepository.getDemeanorsByInfectionLevelSync(0, 2);
-      int females = n - rng.nextInt(n);
-      int males = n - females;
-      for (int i = 0; i < females; i++) {
-        friends.add(makeFriend("female", n, demeanors));
-      }
-      for (int i = 0; i < males; i++) {
-        friends.add(makeFriend("male", n, demeanors));
-      }
-    } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
+    int females = n - rng.nextInt(n);
+    int males = n - females;
+    for (int i = 0; i < females; i++) {
+      friends.add(makeFriend("female", n, demeanors));
+    }
+    for (int i = 0; i < males; i++) {
+      friends.add(makeFriend("male", n, demeanors));
     }
     return friends;
   }
@@ -63,7 +59,7 @@ public class FriendGenerator {
     friend.setProfilePicture(String.format(FILEPATH_FORMAT, sex, rng.nextInt(n)));
     friend.setDemeanor(demeanors.get(rng.nextInt(demeanors.size())).getId());
     friend.setActive(true);
-    friend.setAddress(1); // TODO Update this when addresses exist.
+    friend.setAddress(rng.nextInt(n)); // TODO Update this when addresses exist.
     return friend;
   }
 
