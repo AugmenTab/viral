@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "291de0925d8fe23d35c407cdfdaf8f84",
+    "identityHash": "d24f4d20fc5500028920558dcdeb19b8",
     "entities": [
       {
         "tableName": "Game",
@@ -135,11 +135,11 @@
           },
           {
             "name": "index_Friend_profile_picture",
-            "unique": true,
+            "unique": false,
             "columnNames": [
               "profile_picture"
             ],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `${TABLE_NAME}` (`profile_picture`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `${TABLE_NAME}` (`profile_picture`)"
           },
           {
             "name": "index_Friend_demeanor_id",
@@ -449,7 +449,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '291de0925d8fe23d35c407cdfdaf8f84')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd24f4d20fc5500028920558dcdeb19b8')"
     ]
   }
 }

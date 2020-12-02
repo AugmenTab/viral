@@ -3,55 +3,37 @@ package edu.cnm.deepdive.viral.viewmodel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import edu.cnm.deepdive.viral.generator.FriendGenerator;
-import edu.cnm.deepdive.viral.model.dao.FriendDao;
-import edu.cnm.deepdive.viral.model.dao.GameDao;
-import edu.cnm.deepdive.viral.model.entity.Friend;
-import edu.cnm.deepdive.viral.model.entity.Game;
-import edu.cnm.deepdive.viral.service.ViralDatabase;
-import io.reactivex.schedulers.Schedulers;
+import edu.cnm.deepdive.viral.service.FriendRepository;
+import edu.cnm.deepdive.viral.service.GameRepository;
+import io.reactivex.disposables.Disposable;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 
 public class NewGameViewModel extends AndroidViewModel {
 
   private static final int STARTING_FRIENDS_COUNT_DEFAULT = 15;
 
-  private final GameDao gameDao;
-  private final FriendDao friendDao;
+  private final FriendRepository friendRepository;
+  private final GameRepository gameRepository;
 
   public NewGameViewModel(@NonNull Application application) {
     super(application);
-    gameDao = ViralDatabase.getInstance().getGameDao();
-    friendDao = ViralDatabase.getInstance().getFriendDao();
+    gameRepository = new GameRepository(application);
+    friendRepository = new FriendRepository(application);
   }
 
   public void newGame(String username, int n) {
-     createGameInDatabase(username, n);
+     Disposable result = gameRepository.createGameInDatabase(
+         username, (n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT));
     // TODO: Generate friends
     try {
-      createFriendsListInDatabase(n);
+      friendRepository.createFriendsListInDatabase(
+          getApplication(), n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT);
     } catch (IOException e) {
       e.printStackTrace();
     }
     // TODO: Create initial posts by friends
     // TODO: Delete "user" file, if one exists.
     // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
-  }
-
-  private void createGameInDatabase(String username, int n) {
-    Game game = new Game();
-    game.setUsername(username);
-    game.setStartTime(new Date());
-    game.setFriendsLeft(n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT);
-    gameDao.insert(game).subscribeOn(Schedulers.io()).subscribe();
-  }
-
-  private void createFriendsListInDatabase(int n) throws IOException {
-    FriendGenerator generator = new FriendGenerator(this.getApplication());
-    List<Friend> friends = generator.makeFriends(n > 0 ? n : STARTING_FRIENDS_COUNT_DEFAULT);
-    friendDao.insert(friends).subscribeOn(Schedulers.io()).subscribe();
   }
 
 }

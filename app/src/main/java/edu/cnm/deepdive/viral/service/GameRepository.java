@@ -6,6 +6,9 @@ import edu.cnm.deepdive.viral.model.dao.GameDao;
 import edu.cnm.deepdive.viral.model.entity.Game;
 import edu.cnm.deepdive.viral.model.pojo.ScoreSummary;
 import io.reactivex.Completable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import java.util.Date;
 import java.util.List;
 
 public class GameRepository {
@@ -49,6 +52,14 @@ public class GameRepository {
     return (game.getId() == 0)
         ? Completable.complete()
         : gameDao.delete(game).ignoreElement();
+  }
+
+  public Disposable createGameInDatabase(String username, int n) {
+    Game game = new Game();
+    game.setUsername(username);
+    game.setStartTime(new Date());
+    game.setFriendsLeft(n);
+    return gameDao.insert(game).subscribeOn(Schedulers.io()).subscribe();
   }
 
 }
