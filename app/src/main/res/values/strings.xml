@@ -17,5 +17,7 @@
   <string name="send_message_button">Send Message</string>
 
   <string name="no_username_message">Please enter a username.</string>
+  <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+  <string name="image_load_failure_message">Image load failed.</string>
 
 </resources>
