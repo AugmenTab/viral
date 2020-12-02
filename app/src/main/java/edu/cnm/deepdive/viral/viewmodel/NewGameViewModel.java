@@ -37,6 +37,7 @@ public class NewGameViewModel extends AndroidViewModel {
     for (int i = 0; i < 5; i++) {
       friendRepository.createPost(rng);
     }
+    // TODO: Infect starting friend(s).
     // TODO: Delete "user" file, if one exists.
     // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
   }

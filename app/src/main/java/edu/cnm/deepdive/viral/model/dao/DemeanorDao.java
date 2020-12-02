@@ -46,4 +46,7 @@ public interface DemeanorDao {
   @Query(SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY)
   LiveData<List<Demeanor>> selectDemeanorsByInfectionLevel(int min, int max);
 
+  @Query(SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY)
+  List<Demeanor> selectDemeanorsByInfectionLevelSync(int min, int max);
+
 }
