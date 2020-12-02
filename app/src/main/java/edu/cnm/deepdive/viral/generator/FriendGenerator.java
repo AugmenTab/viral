@@ -56,7 +56,7 @@ public class FriendGenerator {
       name = maleNames.get(rng.nextInt(maleNames.size())).get(0);
     }
     friend.setName(String.format("%s %s", name, surname));
-    friend.setProfilePicture(String.format(FILEPATH_FORMAT, sex, rng.nextInt(n))); // TODO What does this mean?
+    friend.setProfilePicture(String.format(FILEPATH_FORMAT, sex, rng.nextInt(n)));
 //    friend.setDemeanor(demeanors.getValue().get(rng.nextInt(demeanors.getValue().size())).getId()); // TODO Related to other null pointer exception?
     friend.setDemeanor(1);
     friend.setActive(true);

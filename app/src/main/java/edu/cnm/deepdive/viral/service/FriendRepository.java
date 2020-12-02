@@ -29,7 +29,7 @@ public class FriendRepository {
   }
 
   public LiveData<List<Friend>> getAllRemaining() {
-    return friendDao.selectAllRemaining(false /* TODO Change back to true. */);
+    return friendDao.selectAllRemaining(true);
   }
 
   public LiveData<List<ActionTaken>> getMessagesByFriend(long id) {
