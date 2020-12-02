@@ -3,13 +3,13 @@ package edu.cnm.deepdive.viral.service;
 import android.app.Application;
 import android.content.Context;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import edu.cnm.deepdive.viral.generator.ActionGenerator;
 import edu.cnm.deepdive.viral.generator.FriendGenerator;
 import edu.cnm.deepdive.viral.model.dao.ActionTakenDao;
 import edu.cnm.deepdive.viral.model.dao.FriendDao;
 import edu.cnm.deepdive.viral.model.entity.Action;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
+import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import io.reactivex.schedulers.Schedulers;
 import java.io.IOException;
@@ -25,12 +25,14 @@ public class FriendRepository {
   private final FriendDao friendDao;
   private final ActionTakenDao actionTakenDao;
   private final ActionRepository actionRepository;
+  private final DemeanorRepository demeanorRepository;
 
   public FriendRepository(Context context) {
     this.context = context;
     friendDao = ViralDatabase.getInstance().getFriendDao();
-    actionRepository = new ActionRepository(context);
     actionTakenDao = ViralDatabase.getInstance().getActionTakenDao();
+    actionRepository = new ActionRepository(context);
+    demeanorRepository = new DemeanorRepository(context);
   }
 
   public LiveData<List<Friend>> getAll() {
@@ -38,12 +40,13 @@ public class FriendRepository {
   }
 
   public List<Friend> getAllRemainingSync() throws InterruptedException, ExecutionException {
-    Callable<List<Friend>> callable = new Callable<List<Friend>>() {
-      @Override
-      public List<Friend> call() throws Exception {
-        return friendDao.selectAllRemainingSync(true);
-      }
-    };
+    Callable<List<Friend>> callable = () -> friendDao.selectAllRemainingSync(true);
+    return Executors.newSingleThreadExecutor().submit(callable).get();
+  }
+
+  public List<Friend> getAllRemainingUninfectedSync()
+      throws InterruptedException, ExecutionException {
+    Callable<List<Friend>> callable = () -> friendDao.selectUninfectedFriendsSync(true);
     return Executors.newSingleThreadExecutor().submit(callable).get();
   }
 
@@ -69,7 +72,6 @@ public class FriendRepository {
   public void createPost(Random rng) {
     try {
       List<Friend> friends = getAllRemainingSync();
-      System.out.println(friends.size());
       Friend poster = friends.get(rng.nextInt(friends.size()));
       List<Action> actions = actionRepository.getPostsSync(poster.getDemeanor());
       ActionGenerator generator = new ActionGenerator();
@@ -80,14 +82,35 @@ public class FriendRepository {
     }
   }
 
-  public void createMessage(Random rng) {
-//    List<Friend> friends = getAllRemainingSync();
-//    System.out.println(friends.size());
-//    Friend poster = friends.get(rng.nextInt(friends.size()));
-//    List<Action> actions = actionRepository.getMessages(poster.getDemeanor()).getValue();
-//    ActionGenerator generator = new ActionGenerator();
-//    ActionTaken message = generator.makeMessage(poster, actions);
-//    actionTakenDao.insert(message).subscribeOn(Schedulers.io()).subscribe();
+  public boolean spreadInfection(Random rng) {
+    try {
+      List<Friend> friends = getAllRemainingSync();
+      Friend infectee = friends.get(rng.nextInt(friends.size()));
+      int infectionLevel = infectee.getInfectionLevel();
+      if (++infectionLevel >= 3) {
+        infectee.setDemeanor(demeanorRepository.getDemeanorByNameSync("infected").getId());
+        spreadInfection(rng);
+      } else {
+        List<Demeanor> demeanors =
+            demeanorRepository.getDemeanorsByInfectionLevelSync(0, infectionLevel);
+        infectee.setDemeanor(demeanors.get(rng.nextInt(demeanors.size())).getId());
+      }
+      infectee.setInfectionLevel(infectionLevel);
+      friendDao.update(infectee).subscribeOn(Schedulers.io()).subscribe();
+      return checkIfAllInfected();
+    } catch (InterruptedException | ExecutionException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  private boolean checkIfAllInfected() {
+    try {
+      return !getAllRemainingUninfectedSync().isEmpty();
+    } catch (InterruptedException | ExecutionException e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 
 }

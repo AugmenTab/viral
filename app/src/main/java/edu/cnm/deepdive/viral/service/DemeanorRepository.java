@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.viral.model.dao.ActionDao;
 import edu.cnm.deepdive.viral.model.dao.DemeanorDao;
 import edu.cnm.deepdive.viral.model.entity.Demeanor;
-import edu.cnm.deepdive.viral.model.entity.Friend;
 import edu.cnm.deepdive.viral.model.pojo.DemeanorWithActions;
 import io.reactivex.Completable;
 import java.util.List;
@@ -36,12 +35,14 @@ public class DemeanorRepository {
 
   public List<Demeanor> getDemeanorsByInfectionLevelSync(int min, int max)
       throws InterruptedException, ExecutionException {
-    Callable<List<Demeanor>> callable = new Callable<List<Demeanor>>() {
-      @Override
-      public List<Demeanor> call() throws Exception {
-        return demeanorDao.selectDemeanorsByInfectionLevelSync(min, max);
-      }
-    };
+    Callable<List<Demeanor>> callable = () ->
+        demeanorDao.selectDemeanorsByInfectionLevelSync(min, max);
+    return Executors.newSingleThreadExecutor().submit(callable).get();
+  }
+
+  public Demeanor getDemeanorByNameSync(String name)
+      throws InterruptedException, ExecutionException {
+    Callable<Demeanor> callable = () -> demeanorDao.selectDemeanorByNameSync(name);
     return Executors.newSingleThreadExecutor().submit(callable).get();
   }
 

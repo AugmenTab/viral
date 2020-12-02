@@ -33,11 +33,10 @@ public class NewGameViewModel extends AndroidViewModel {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    // TODO: Create initial posts by friends
     for (int i = 0; i < 5; i++) {
       friendRepository.createPost(rng);
     }
-    // TODO: Infect starting friend(s).
+    friendRepository.spreadInfection(rng);
     // TODO: Delete "user" file, if one exists.
     // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
   }
