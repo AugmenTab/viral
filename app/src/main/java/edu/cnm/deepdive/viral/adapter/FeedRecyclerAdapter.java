@@ -1,39 +1,35 @@
 package edu.cnm.deepdive.viral.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Picasso.Listener;
 import edu.cnm.deepdive.viral.R;
+import edu.cnm.deepdive.viral.adapter.FeedRecyclerAdapter.Holder;
 import edu.cnm.deepdive.viral.databinding.ItemPostBinding;
 import edu.cnm.deepdive.viral.model.entity.Action;
-import edu.cnm.deepdive.viral.model.entity.ActionResponse;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedRecyclerAdapter extends RecyclerView.Adapter {
+public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
   private final List<ActionTaken> posts;
   private final DateFormat formatter;
   private final LayoutInflater inflater;
   private final Action postAction;
-  private final ActionResponse postComment;
   private final Friend poster;
 
-  public FeedRecyclerAdapter(@NonNull Context context, @NonNull Action postAction,
-      @NonNull ActionResponse postComment, @NonNull Friend poster) {
+  public FeedRecyclerAdapter(
+      @NonNull Context context, @NonNull Action postAction, @NonNull Friend poster) {
     this.context = context;
     this.postAction = postAction;
-    this.postComment = postComment;
     this.poster = poster;
     posts = new ArrayList<>();
     formatter = DateFormat.getInstance();
@@ -46,7 +42,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter {
 
   @NonNull
   @Override
-  public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     ItemPostBinding binding = ItemPostBinding.inflate(inflater, parent, false);
     return new Holder(binding);
   }
@@ -72,17 +68,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter {
 
     private void bind(int position) {
       ActionTaken post = posts.get(position);
-      Picasso picasso = new Picasso.Builder(context).listener(new Listener() {
-        @Override
-        public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-          Toast.makeText(context, R.string.image_load_failure_message, Toast.LENGTH_SHORT);
-        }
-      }).build();
+      Picasso picasso = new Picasso.Builder(context).listener((picasso1, uri, exception) ->
+          Toast.makeText(context, R.string.image_load_failure_message, Toast.LENGTH_SHORT)).build();
       picasso.load(poster.getProfilePicture()).into(binding.postProfilePicture);
       binding.postPoster.setText(poster.getName());
       binding.postContents.setText(postAction.getContent());
       String timestamp = String.format(
-          "Posted %s @ %s", formatter.format(post.getTimestamp()), poster.getAddress());
+          "Posted on %s @ %s", formatter.format(post.getTimestamp()), poster.getAddress());
       binding.postTimestamp.setText(timestamp);
 //      binding.buttonFocus.setOnClickListener(); REDIRECTS TO FEED FOR THAT FRIEND
 //      binding.buttonMessage.setOnClickListener(); CREATES MESSAGE, THEN REDIRECTS TO MESSAGE PAGE

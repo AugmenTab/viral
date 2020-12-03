@@ -13,7 +13,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagesRecyclerAdapter extends RecyclerView.Adapter {
+public class MessagesRecyclerAdapter /* extends RecyclerView.Adapter */ { /*
 
   private final Context context;
   private final List<ActionTaken> messages;
@@ -64,5 +64,5 @@ public class MessagesRecyclerAdapter extends RecyclerView.Adapter {
     }
 
   }
-
+*/
 }
