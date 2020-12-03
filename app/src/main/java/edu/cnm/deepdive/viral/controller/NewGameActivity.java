@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.viral.controller;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,12 +36,17 @@ public class NewGameActivity extends AppCompatActivity {
     NewGameViewModel viewModel = new ViewModelProvider(this).get(NewGameViewModel.class);
     viewModel.getThrowable().observe(this, (throwable) ->
         Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable));
+    SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+    String preferredUsername = preferences.getString("username", "");
+    Toast.makeText(NewGameActivity.this, "Username: " + preferredUsername, Toast.LENGTH_LONG);
+    binding.accountNameInput.setText(preferredUsername);
     binding.newGameButton.setOnClickListener((v) -> {
       String username = binding.accountNameInput.getText().toString().trim();
       if (username.isEmpty()) {
         Toast.makeText(
             NewGameActivity.this, R.string.no_username_message, Toast.LENGTH_SHORT).show();
       } else {
+        preferences.edit().putString("username", username);
         viewModel.newGame(username, 0);
         switchActivity();
       }
