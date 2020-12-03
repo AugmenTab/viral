@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.cnm.deepdive.viral.adapter.MessagesRecyclerAdapter.Holder;
 import edu.cnm.deepdive.viral.databinding.ItemMessageFriendBinding;
 import edu.cnm.deepdive.viral.model.entity.Action;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
@@ -13,7 +14,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagesRecyclerAdapter /* extends RecyclerView.Adapter */ { /*
+public class MessagesRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
   private final List<ActionTaken> messages;
@@ -34,7 +35,7 @@ public class MessagesRecyclerAdapter /* extends RecyclerView.Adapter */ { /*
 
   @NonNull
   @Override
-  public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     ItemMessageFriendBinding binding = ItemMessageFriendBinding.inflate(inflater, parent, false);
     return new Holder(binding);
   }
@@ -64,5 +65,5 @@ public class MessagesRecyclerAdapter /* extends RecyclerView.Adapter */ { /*
     }
 
   }
-*/
+
 }
