@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.viral.model.dao;
 
+import android.view.animation.AccelerateInterpolator;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +8,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.Collection;
 import java.util.List;

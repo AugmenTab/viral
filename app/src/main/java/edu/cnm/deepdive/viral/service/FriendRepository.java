@@ -1,7 +1,7 @@
 package edu.cnm.deepdive.viral.service;
 
-import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.viral.generator.ActionGenerator;
 import edu.cnm.deepdive.viral.generator.FriendGenerator;
@@ -9,19 +9,15 @@ import edu.cnm.deepdive.viral.model.dao.ActionTakenDao;
 import edu.cnm.deepdive.viral.model.dao.FriendDao;
 import edu.cnm.deepdive.viral.model.entity.Action;
 import edu.cnm.deepdive.viral.model.entity.ActionTaken;
-import edu.cnm.deepdive.viral.model.entity.Demeanor;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
-import java.io.IOException;
+import io.reactivex.functions.Function;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 
 public class FriendRepository {
 
@@ -47,12 +43,6 @@ public class FriendRepository {
     return friendDao.selectAllRemainingSync(true);
   }
 
-  public List<Friend> getAllRemainingUninfectedSync()
-      throws InterruptedException, ExecutionException {
-    Callable<List<Friend>> callable = () -> friendDao.selectUninfectedFriendsSync(true);
-    return Executors.newSingleThreadExecutor().submit(callable).get();
-  }
-
   public LiveData<List<Friend>> getAllRemaining() {
     return friendDao.selectAllRemaining(true);
   }
@@ -75,51 +65,26 @@ public class FriendRepository {
         .ignoreElement();
   }
 
-  public Completable createPost(Random rng, int num) {
+  public Completable createPost(Random rng, int postsToMake) {
     ActionGenerator generator = new ActionGenerator();
     return getAllRemainingSync()
         .flatMapObservable((friends) -> {
           List<Friend> selection = new LinkedList<>();
-          for (int i = 0; i < num; i++) {
+          for (int i = 0; i < postsToMake; i++) {
             selection.add(friends.get(rng.nextInt(friends.size())));
           }
           return Observable.fromIterable(selection);
         })
         .map((friend) -> actionRepository.getPostsSync(friend.getDemeanor())
-            .flatMap((actions) -> actionTakenDao.insert(generator.makePost(friend, actions)))
-        )
+            .flatMap((actions) ->
+                actionTakenDao.insert(generator.makePostOrMessage(friend, actions))))
+        .concatMap(
+            (Function<Single<Long>, ObservableSource<Long>>) Single::toObservable)
         .ignoreElements();
   }
 
-  public boolean spreadInfection(Random rng) {
-    try {
-      List<Friend> friends = getAllRemainingSync();
-      Friend infectee = friends.get(rng.nextInt(friends.size()));
-      int infectionLevel = infectee.getInfectionLevel();
-      if (++infectionLevel >= 3) {
-        infectee.setDemeanor(demeanorRepository.getDemeanorByNameSync("infected").getId());
-        spreadInfection(rng);
-      } else {
-        List<Demeanor> demeanors =
-            demeanorRepository.getDemeanorsByInfectionLevelSync(0, infectionLevel);
-        infectee.setDemeanor(demeanors.get(rng.nextInt(demeanors.size())).getId());
-      }
-      infectee.setInfectionLevel(infectionLevel);
-      friendDao.update(infectee).subscribeOn(Schedulers.io()).subscribe();
-      return checkIfAllInfected();
-    } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
-    }
-    return false;
-  }
+  public void spreadInfection(Random rng) {
 
-  private boolean checkIfAllInfected() {
-    try {
-      return !getAllRemainingUninfectedSync().isEmpty();
-    } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
-    }
-    return false;
   }
 
 }

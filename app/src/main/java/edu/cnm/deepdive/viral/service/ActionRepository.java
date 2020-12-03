@@ -4,12 +4,8 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.viral.model.dao.ActionDao;
 import edu.cnm.deepdive.viral.model.entity.Action;
-import edu.cnm.deepdive.viral.model.entity.Friend;
 import io.reactivex.Single;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 
 public class ActionRepository {
 

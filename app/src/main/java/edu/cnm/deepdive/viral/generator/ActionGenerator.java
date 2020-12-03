@@ -20,16 +20,7 @@ public class ActionGenerator {
     return action;
   }
 
-  public ActionTaken makeMessage(Friend friend, List<Action> actions) {
-    ActionTaken action = new ActionTaken();
-    action.setAction(actions.get(rng.nextInt(actions.size())).getId());
-    action.setTimestamp(new Date());
-    action.setFriend(friend.getId());
-    action.setResponseTo(null);
-    return action;
-  }
-
-  public ActionTaken makePost(Friend friend, List<Action> actions) {
+  public ActionTaken makePostOrMessage(Friend friend, List<Action> actions) {
     ActionTaken action = new ActionTaken();
     action.setAction(actions.get(rng.nextInt(actions.size())).getId());
     action.setTimestamp(new Date());

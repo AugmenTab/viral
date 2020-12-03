@@ -32,6 +32,8 @@ public class NewGameActivity extends AppCompatActivity {
     binding = ActivityNewGameBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
     NewGameViewModel viewModel = new ViewModelProvider(this).get(NewGameViewModel.class);
+    viewModel.getThrowable().observe(this, (throwable) ->
+        Log.e(getClass().getSimpleName(), throwable.getMessage(), throwable));
     binding.newGameButton.setOnClickListener((v) -> {
       String username = binding.accountNameInput.getText().toString().trim();
       if (username.isEmpty()) {

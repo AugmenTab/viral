@@ -1,13 +1,13 @@
 package edu.cnm.deepdive.viral.viewmodel;
 
 import android.app.Application;
+import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.viral.service.FriendRepository;
 import edu.cnm.deepdive.viral.service.GameRepository;
-import io.reactivex.disposables.Disposable;
-import java.io.IOException;
 import java.util.Random;
 
 public class NewGameViewModel extends AndroidViewModel {
@@ -27,6 +27,10 @@ public class NewGameViewModel extends AndroidViewModel {
     throwable = new MutableLiveData<>();
   }
 
+  public LiveData<Throwable> getThrowable() {
+    return throwable;
+  }
+
   public void newGame(String username, int startingFriendsCount) {
     gameRepository.createGameInDatabase(rng, username, 5,
         (startingFriendsCount > 0 ? startingFriendsCount : STARTING_FRIENDS_COUNT_DEFAULT))
@@ -34,9 +38,11 @@ public class NewGameViewModel extends AndroidViewModel {
             () -> {},
             throwable::postValue
         );
-    friendRepository.spreadInfection(rng);
-    // TODO: Delete "user" file, if one exists.
-    // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
+//    friendRepository.spreadInfection(rng);
+      // TODO: Delete "user" file, if one exists.
+    if (getApplication().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+      // TODO: Use camera, and store photo taken by user as "user" img file. Where will it be saved? Picasso?
+    }
   }
 
 }

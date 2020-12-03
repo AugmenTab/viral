@@ -44,7 +44,7 @@ public interface DemeanorDao {
   LiveData<Demeanor> selectDemeanorByName(String name);
 
   @Query("SELECT * FROM Demeanor WHERE name = :name")
-  Demeanor selectDemeanorByNameSync(String name);
+  Single<Demeanor> selectDemeanorByNameSync(String name);
 
   @Query(SELECT_DEMEANOR_BY_INFECTION_LEVEL_QUERY)
   LiveData<List<Demeanor>> selectDemeanorsByInfectionLevel(int min, int max);

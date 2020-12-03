@@ -59,7 +59,7 @@ public class FriendGenerator {
     friend.setProfilePicture(String.format(FILEPATH_FORMAT, sex, rng.nextInt(n)));
     friend.setDemeanor(demeanors.get(rng.nextInt(demeanors.size())).getId());
     friend.setActive(true);
-    friend.setAddress(rng.nextInt(n)); // TODO Update this when addresses exist.
+    friend.setAddress(rng.nextInt(n) + 1); // TODO Update this when addresses exist.
     return friend;
   }
 
