@@ -10,6 +10,9 @@ import edu.cnm.deepdive.viral.service.FriendRepository;
 import edu.cnm.deepdive.viral.service.GameRepository;
 import java.util.Random;
 
+/**
+ * The view model for the {@link NewGameViewModel}.
+ */
 public class NewGameViewModel extends AndroidViewModel {
 
   private static final int STARTING_FRIENDS_COUNT_DEFAULT = 15;
@@ -19,6 +22,12 @@ public class NewGameViewModel extends AndroidViewModel {
   private final Random rng;
   private final MutableLiveData<Throwable> throwable;
 
+  /**
+   * The constructor initializes the {@link GameRepository}, {@link FriendRepository}, a new source
+   * of {@code Random}, and a {@code MutableLiveData} representing a throwable.
+   *
+   * @param application The Viral application.
+   */
   public NewGameViewModel(@NonNull Application application) {
     super(application);
     gameRepository = new GameRepository(application);
@@ -27,10 +36,21 @@ public class NewGameViewModel extends AndroidViewModel {
     throwable = new MutableLiveData<>();
   }
 
+  /**
+   * Gets a throwable.
+   *
+   * @return {@code throwable}
+   */
   public LiveData<Throwable> getThrowable() {
     return throwable;
   }
 
+  /**
+   * Creates a new game.
+   *
+   * @param username The String entered by the user as their username.
+   * @param startingFriendsCount The number of friends the user will start the game with.
+   */
   public void newGame(String username, int startingFriendsCount) {
     gameRepository.createGameInDatabase(rng, username, 5,
         (startingFriendsCount > 0 ? startingFriendsCount : STARTING_FRIENDS_COUNT_DEFAULT))
