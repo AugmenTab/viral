@@ -8,25 +8,25 @@
   <fragment
     android:id="@+id/nav_feed"
     android:label="@string/menu_feed"
-    android:name="edu.cnm.deepdive.viral.controller.ui.feed.FeedFragment"
+    android:name="edu.cnm.deepdive.viral.controller.FeedFragment"
     tools:layout="@layout/fragment_feed"/>
 
   <fragment
     android:id="@+id/nav_friends_list"
     android:label="@string/menu_friends_list"
-    android:name="edu.cnm.deepdive.viral.controller.ui.friendsList.FriendsListFragment"
+    android:name="edu.cnm.deepdive.viral.controller.FriendsListFragment"
     tools:layout="@layout/fragment_friends_list"/>
 
   <fragment
     android:id="@+id/nav_messages"
     android:label="@string/menu_messages"
-    android:name="edu.cnm.deepdive.viral.controller.ui.messages.MessagesFragment"
+    android:name="edu.cnm.deepdive.viral.controller.MessagesFragment"
     tools:layout="@layout/fragment_messages"/>
 
   <fragment
     android:id="@+id/nav_map"
     android:label="@string/menu_map"
-    android:name="edu.cnm.deepdive.viral.controller.ui.map.MapFragment"
+    android:name="edu.cnm.deepdive.viral.controller.MapFragment"
     tools:layout="@layout/fragment_map"/>
 
 </navigation>

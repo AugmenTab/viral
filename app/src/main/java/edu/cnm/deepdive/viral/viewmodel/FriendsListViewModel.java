@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.controller.ui.friendsList;
+package edu.cnm.deepdive.viral.viewmodel;
 
 import android.app.Application;
 import androidx.annotation.NonNull;

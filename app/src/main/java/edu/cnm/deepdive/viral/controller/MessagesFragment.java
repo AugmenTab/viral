@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.controller.ui.messages;
+package edu.cnm.deepdive.viral.controller;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,22 +7,32 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import edu.cnm.deepdive.viral.R;
+import edu.cnm.deepdive.viral.viewmodel.MessagesViewModel;
 import edu.cnm.deepdive.viral.databinding.FragmentMessagesBinding;
 import edu.cnm.deepdive.viral.model.entity.Friend;
 
+/**
+ * This page shows the messages a user has received from any particular {@link Friend} on their
+ * friend's list. By selecting a friend, it displays the messages for only that user. They are also
+ * able to create messages from this page, which are immediately responded to by the friend.
+ */
 public class MessagesFragment extends Fragment {
 
   private MessagesViewModel messagesViewModel;
   private FragmentMessagesBinding binding;
 
+  /**
+   * The constructor initializes the inflater for binding.
+   *
+   * @param inflater A {@code LayoutInflater} for use in view binding.
+   * @param container
+   * @param savedInstanceState
+   * @return A {@code View}.
+   */
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentMessagesBinding.inflate(inflater);

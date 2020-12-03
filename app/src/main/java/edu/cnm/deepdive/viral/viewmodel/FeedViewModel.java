@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.viral.controller.ui.feed;
+package edu.cnm.deepdive.viral.viewmodel;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
