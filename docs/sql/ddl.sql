@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Friend`
 
 CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_name` ON `Friend` (`name`);
 
-CREATE UNIQUE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `Friend` (`profile_picture`);
+CREATE INDEX IF NOT EXISTS `index_Friend_profile_picture` ON `Friend` (`profile_picture`);
 
 CREATE INDEX IF NOT EXISTS `index_Friend_demeanor_id` ON `Friend` (`demeanor_id`);
 
