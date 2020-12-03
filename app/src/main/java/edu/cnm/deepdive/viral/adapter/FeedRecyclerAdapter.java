@@ -17,6 +17,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RecyclerView that displays the posts in the user's Feed.
+ */
 public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
@@ -26,6 +29,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final Action postAction;
   private final Friend poster;
 
+  /**
+   * The constructor initializes the context, the post {@link Action}, and the {@link Friend} that
+   * posted it.
+   *
+   * @param context The application context.
+   * @param postAction The {@link Action} that the post represents.
+   * @param poster The {@link Friend} that made the post.
+   */
   public FeedRecyclerAdapter(
       @NonNull Context context, @NonNull Action postAction, @NonNull Friend poster) {
     this.context = context;
@@ -34,10 +45,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     posts = new ArrayList<>();
     formatter = DateFormat.getInstance();
     inflater = LayoutInflater.from(context);
-  }
-
-  public List<ActionTaken> getPosts() {
-    return posts;
   }
 
   @NonNull
@@ -57,6 +64,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     return posts.size();
   }
 
+  /**
+   * ViewHolder class for inflating each post in the feed.
+   */
   class Holder extends RecyclerView.ViewHolder {
 
     private final ItemPostBinding binding;
@@ -76,8 +86,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<Holder> {
       String timestamp = String.format(
           "Posted on %s @ %s", formatter.format(post.getTimestamp()), poster.getAddress());
       binding.postTimestamp.setText(timestamp);
-//      binding.buttonFocus.setOnClickListener(); REDIRECTS TO FEED FOR THAT FRIEND
-//      binding.buttonMessage.setOnClickListener(); CREATES MESSAGE, THEN REDIRECTS TO MESSAGE PAGE
+      binding.buttonFocus.setOnClickListener((v) -> {
+        // TODO Redirect to the feed for that friend.
+      });
+      binding.buttonMessage.setOnClickListener(v -> {
+        // TODO Create a message to that friend, then redirect to messages and set them as the
+        //  selected friend.
+      });
       // TODO Add comments.
     }
 

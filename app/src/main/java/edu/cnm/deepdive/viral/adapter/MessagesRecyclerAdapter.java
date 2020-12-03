@@ -14,6 +14,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RecyclerView that displays the messages for the selected friend in the user's Messages window.
+ */
 public class MessagesRecyclerAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
@@ -23,6 +26,14 @@ public class MessagesRecyclerAdapter extends RecyclerView.Adapter<Holder> {
   private final Action messageAction;
   private final Friend friend;
 
+  /**
+   * The constructor initializes the context, the {@link Action} associated with the message, and
+   * the {@link Friend} that sent the message.
+   *
+   * @param context
+   * @param messageAction
+   * @param friend
+   */
   public MessagesRecyclerAdapter(
       @NonNull Context context, @NonNull Action messageAction, @NonNull Friend friend) {
     this.context = context;
@@ -50,6 +61,9 @@ public class MessagesRecyclerAdapter extends RecyclerView.Adapter<Holder> {
     return messages.size();
   }
 
+  /**
+   * ViewHolder class for inflating each message in the message screen for the selected friend.
+   */
   class Holder extends RecyclerView.ViewHolder {
 
     private final ItemMessageFriendBinding binding;
