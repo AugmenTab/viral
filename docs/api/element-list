@@ -1,0 +1,10 @@
+edu.cnm.deepdive.viral
+edu.cnm.deepdive.viral.adapter
+edu.cnm.deepdive.viral.controller
+edu.cnm.deepdive.viral.databinding
+edu.cnm.deepdive.viral.generator
+edu.cnm.deepdive.viral.model.dao
+edu.cnm.deepdive.viral.model.entity
+edu.cnm.deepdive.viral.model.pojo
+edu.cnm.deepdive.viral.service
+edu.cnm.deepdive.viral.viewmodel

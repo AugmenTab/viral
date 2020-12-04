@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+ext {
+    appName = 'Viral'
+    appNameSlug = 'viral'
+    baseUrl = 'https://augmentab.github.io'
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
@@ -75,4 +81,33 @@ dependencies {
     implementation 'org.apache.commons:commons-csv:1.8'
     implementation 'org.apache.commons:commons-collections4:4.4'
 
+}
+
+android.applicationVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+        def docTitle = "${appName} ${project.android.defaultConfig.versionName}"
+        def compileTask = variant.javaCompileProvider.get()
+        def androidLibJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        title docTitle
+        description "Generates Javadoc for $variant.name."
+        source = compileTask.source
+        destinationDir = file("${projectDir}/../docs/api")
+        doFirst {
+            classpath = files(compileTask.classpath.files) + files(androidLibJar)
+        }
+        options {
+            links 'https://docs.oracle.com/javase/8/docs/api/'
+            links 'http://reactivex.io/RxJava/javadoc/'
+            links 'https://javadoc.io/doc/io.reactivex.rxjava2/rxandroid/latest/'
+            links 'https://javadoc.io/doc/com.facebook.stetho/stetho/latest/'
+            links 'https://commons.apache.org/proper/commons-csv/apidocs/'
+            links 'http://commons.apache.org/proper/commons-collections/apidocs/'
+            links 'https://square.github.io/picasso/2.x/picasso/'
+            linksOffline 'https://developer.android.com/reference', "${projectDir}/../link-offline/android"
+            linksOffline 'https://developers.google.com/android/reference', "${projectDir}/../link-offline/google"
+            windowTitle docTitle
+        }
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.source = '8'
+    }
 }
