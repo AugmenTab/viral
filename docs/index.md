@@ -62,12 +62,12 @@ The game will be data-driven, with all possible text displayed during the game l
 
 * [Basic User Instructions](user-instructions.md)
 * [Build Instructions](build-instructions.md)
-* [Copyright and Licenses]()
+* [Copyright and Licenses](copyright-and-licenses.md)
 * [Data Model Implementation](data-model-implementation.md)
 * [DDL](ddl.md)
 * [Entity-Relationship Diagram](entity-relationship.md)
 * [Javadocs]()
-* [Technical Requirements and Dependencies](requirements.md) TODO
+* [Technical Requirements and Dependencies](requirements.md)
 
 ## Current State
 

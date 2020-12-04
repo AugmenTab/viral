@@ -24,9 +24,12 @@
 * [DemeanorWithActions](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/pojo/DemeanorWithActions.java)
 
 ## Repository Classes
-* [GameRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/GameRepository.java)
-* [DemeanorRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/DemeanorRepository.java)
+
+* [ActionRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/service/ActionRepository.java)
+* [DemeanorRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/service/DemeanorRepository.java)
+* [FriendRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/service/FriendRepository.java)
+* [GameRepository](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/service/GameRepository.java)
 
 ## Database Class
 
-* [ViralDatabase](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/model/service/ViralDatabase.java)
+* [ViralDatabase](https://github.com/AugmenTab/viral/blob/master/app/src/main/java/edu/cnm/deepdive/viral/service/ViralDatabase.java)
