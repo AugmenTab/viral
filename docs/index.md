@@ -66,7 +66,7 @@ The game will be data-driven, with all possible text displayed during the game l
 * [Data Model Implementation](data-model-implementation.md)
 * [DDL](ddl.md)
 * [Entity-Relationship Diagram](entity-relationship.md)
-* [Javadocs]()
+* [Javadocs](api/)
 * [Technical Requirements and Dependencies](requirements.md)
 
 ## Current State
