@@ -7,6 +7,8 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * The main application class for the Viral application.
+ *  * @author Tyler Baum, Nicholas Bennett, Todd Nordquist
+ *  * @version v0.1.0
  */
 public class ViralApplication extends Application {
 
