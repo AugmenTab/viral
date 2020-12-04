@@ -96,3 +96,6 @@ I have ordered the stretch goals for the Viral project by their level of utility
 * I would like to collect the names and photos for the fake friends list by taking names and photos from the user's contacts, to make it a more personalized experience.
 * I would like to utilize the [Google Maps API](https://developers.google.com/maps/documentation/android-sdk/overview) or [LocationIQ](https://locationiq.com/geocoding) to make the user's "current location" their actual home address, and have the infected friends pop up around their actual location within a very narrow radius to their home, making it feel more personal and nearby.
 * I would like to connect the [Google AdMob](https://developers.google.com/admob) services to display ads as if they were social media posts.
+* I would like to create a multiplayer version of the game, with two possible game modes:
+    * The players must work cooperatively to eliminate the infected players from *everyone's* list, though not all friends will be on everyone's lists.
+    * The players must work to find the one infected player in the group, who can spread the infection to friends in the friends list and even to other players.
