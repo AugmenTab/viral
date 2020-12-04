@@ -1,10 +1,10 @@
-## Summary TODO
+## Summary
 
 Viral is a single-player turn-based strategy game set inside a social media app. After setting up their account on the fledgling platform, the player will be informed through the app that the CDC has marked their area at risk of a mysterious illness spreading through social media, causing their friends to become hostile. It begins to "infect" the friends on their friends list through the app, slowly causing the people on their network to behave strangely and ultimately turning them hostile toward the player. The player will use clues about the friends from their profiles and posts to determine who has been infected by this illness, and clear them from the friends list as fast as possible. The win condition is to clear all infected friends from the friends list without being brought down to zero friends.
 
-[1 or more paragraphs summarizing your aims or motivations for selecting the given topic for your app. That is, why did you choose to develop this particular app, and why is this (at least potentially) a useful or interesting app?]
+I chose Viral as my project idea because I wanted to focus on something that was heavily dependent on a database to function properly. I have a number of other project ideas that require this, so I decided to use Viral to "dip my toe in" and get some experience with a data-driven project. While maybe not exactly useful, I found it to be interesting. While the idea of a game that takes place in a virtual or digital setting is nothing new (see Pony Island for an example), I have never seen one that takes place inside a fictional social media app. It also combines elements of turn-based strategy and (very light) horror themes, a combination I happen to enjoy but see very little of in the gaming industry.
 
-[1 or more paragraphs summarizing the key functional elements of the app.]
+Viral is very dependent on its database. On creation, a list of all possible actions and demeanors that the user's friends can have are immediately persisted into the database. It will also eventually use Leaflet.js to provide a fake neighborhood map to show the player where all of the outbreaks have occurred near them, and allow the user to take their own profile picture using the device camera.
 
 ## Intended Users
 
@@ -54,7 +54,7 @@ The game will be data-driven, with all possible text displayed during the game l
     * The app will take advantage of Leaflet's ability to place markers on a user-imported map image to track the location of infected players after they reach a critical infection point. This will be displayed as a pinned link on the user's feed, presented in the story as a list of addresses where police have responded to reports of unexplained aggressive behavior. This will be accomplished by storing points on the map as values in the database, then assigning a random fake address to the user at the start of a new game as their "current location" and to all members of their friends list. As friends become infected at the maximum infection level, their fake address will be plotted on the map. The user can then check that address against profiles to determine who is infected.
         * This app could still be usable without this external service. Instead of having a map, the player would have to rely on other clues to help them determine which of their friends have been infected - the map simply informs them of final-stage infection, which will not be the ideal time to delete them anyway.
 
-## Wireframe TODO
+## Wireframe
 
 * [Wireframe](wireframe.md)
 
@@ -69,20 +69,30 @@ The game will be data-driven, with all possible text displayed during the game l
 * [Javadocs]()
 * [Technical Requirements and Dependencies](requirements.md) TODO
 
-## Current State TODO
+## Current State
 
-In grading a prototype, understanding what it does and doesn’t (yet) do is important preparation for evaluating it in operation. Please provide the following in separate paragraphs & lists:
+Viral is currently building, and successfully inserting Actions, Demeanors, Friends, Games, and Actions Taken into the database upon new game creation.
 
-* A description of the current state of completion/readiness of your app. This should include a “hit list” of deficiencies: any unimplemented/incomplete elements, and known bugs, that would have to be implemented or corrected for a usable prototype (i.e. one that could be given to a skilled user for testing and feedback), ordered with the most urgent items first.
+* It is not able to, on launch, recognize when a game is already started and redirect the user to the main activity.
+* It is not able to infect friends on the friends list, which is primarily how the game advances.
+* It is not able to display a friend's messages, nor is it able to display posts.
+* It is not able to display the Leaflet map, the markers indicating infected locales, or the addresses in the list view underneath the map.
+* The user is currently unable to "delete their account" - that is, end the game early, delete that instance of the game, and return to the home screen to start a new game.
+* While most of the layouts have been defined, most of the lists and other displays are not utilizing them, if they are indeed displaying at all.
+* The user is unable to use the camera to take a picture and have it displayed in the game as their "profile picture."
 
 * A list of aesthetic/cosmetic (not functional) enhancements that you think would improve your app. This list should be ordered, with those that would give the most improvement (in your opinion) listed first.
 
-* A list of functional stretch goals. These should be sorted either with those that would add the most utility at the top, or with those that would be the simplest to implement at the top.
+## Aesthetic Enhancements
 
-## Stretch Goals/Possible Enhancements 
+* I would like to provide an option to switch between a light theme and a dark theme as the user pleases.
 
-* I would like to connect the [Google AdMob](https://developers.google.com/admob) services to display ads as if they were social media posts.
+### Functional Stretch Goals
+
+I have ordered the stretch goals for the Viral project by their level of utility.
+
 * I would like to connect the OpenAI GPT-3 API in order to generate realistic unique display text when required. Unfortunately, it is still in beta for the foreseeable future.
 * I would like to connect to an API that can generate realistic fake profile pictures, like the [Generated Photos API](https://generated.photos/api).
 * I would like to collect the names and photos for the fake friends list by taking names and photos from the user's contacts, to make it a more personalized experience.
 * I would like to utilize the [Google Maps API](https://developers.google.com/maps/documentation/android-sdk/overview) or [LocationIQ](https://locationiq.com/geocoding) to make the user's "current location" their actual home address, and have the infected friends pop up around their actual location within a very narrow radius to their home, making it feel more personal and nearby.
+* I would like to connect the [Google AdMob](https://developers.google.com/admob) services to display ads as if they were social media posts.
