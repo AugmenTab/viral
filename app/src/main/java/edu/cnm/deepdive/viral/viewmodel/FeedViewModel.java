@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class FeedViewModel extends AndroidViewModel {
 
-  private FriendRepository friendRepository;
+  private final FriendRepository friendRepository;
 
   /**
    * The constructor initializes a {@link FriendRepository}.

@@ -27,8 +27,8 @@ public class MapFragment extends Fragment {
    * The constructor initializes the inflater for binding.
    *
    * @param inflater A {@code LayoutInflater} for use in view binding.
-   * @param container
-   * @param savedInstanceState
+   * @param container A {@code ViewGroup}.
+   * @param savedInstanceState A {@code Bundle}.
    * @return A {@code View}.
    */
   public View onCreateView(
