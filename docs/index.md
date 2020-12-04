@@ -80,6 +80,8 @@ Viral is currently building, and successfully inserting Actions, Demeanors, Frie
 * The user is currently unable to "delete their account" - that is, end the game early, delete that instance of the game, and return to the home screen to start a new game.
 * While most of the layouts have been defined, most of the lists and other displays are not utilizing them, if they are indeed displaying at all.
 * The user is unable to use the camera to take a picture and have it displayed in the game as their "profile picture."
+* There is a known warning that appears on build, stating the ActionTakenDao has some columns that are not used by the ActionTaken entity. This does not prevent the app from running.
+* There is a known warning that appears on build, stating that the MainActivity uses or overrides a deprecated API, the AppBarConfiguration.Builder.setDrawerLayout.
 
 * A list of aesthetic/cosmetic (not functional) enhancements that you think would improve your app. This list should be ordered, with those that would give the most improvement (in your opinion) listed first.
 
